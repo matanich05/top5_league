@@ -19,3 +19,6 @@ Tabela **player**: igralci, povezani na ekipo (team_id).
 Tabela **match**: tekme v ligi (league_id) z domačo in gostujočo ekipo (home_team_id, away_team_id).  
 Tabela **match_stats**: statistika tekme (1:1 z match).  
 Tabela **player_match_stats**: statistika igralca na tekmi (povezovalna tabela player–match).
+
+## ER diagram
+![ER diagram](docs/er_diagram.png)
