@@ -1,4 +1,5 @@
 import sqlite3
+import csv
 
 PARAM_FMT = ":{}"
 
@@ -14,6 +15,18 @@ class Tabela:
 
     def izbrisi(self):
         self.conn.execute(f"DROP TABLE IF EXISTS {self.ime};")
+    
+    def uvozi(self, encoding="utf-8"):
+        if not hasattr(self, "podatki") or self.podatki is None:
+            return
+
+        with open(self.podatki, encoding=encoding, newline="") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                # prazne nize -> None
+                row = {k: (None if v == "" else v) for k, v in row.items()}
+                self.dodaj_vrstico(**row)
+
 
     def dodajanje(self, stolpci):
         return f"""
@@ -30,6 +43,7 @@ class Tabela:
 
 class League(Tabela):
     ime = "league"
+    podatki = "data/league.csv"
 
     def ustvari(self):
         self.conn.execute("""
@@ -41,22 +55,25 @@ class League(Tabela):
             );
         """)
 
+
 class Team(Tabela):
     ime = "team"
+    podatki = "data/team.csv"
 
     def ustvari(self):
         self.conn.execute("""
             CREATE TABLE team (
-                team_id     INTEGER PRIMARY KEY AUTOINCREMENT,
-                league_id   INTEGER NOT NULL,
-                name        TEXT    NOT NULL,
-                city        TEXT,
-                stadium     TEXT,
+                team_id      INTEGER PRIMARY KEY AUTOINCREMENT,
+                league_id    INTEGER NOT NULL,
+                name         TEXT    NOT NULL,
+                city         TEXT,
+                stadium      TEXT,
                 founded_year INTEGER,
                 FOREIGN KEY (league_id) REFERENCES league(league_id),
                 UNIQUE(league_id, name)
             );
         """)
+
 
 class Player(Tabela):
     ime = "player"
@@ -157,8 +174,13 @@ def izbrisi_tabele(tabele):
     for t in tabele:
         t.izbrisi()
 
+def uvozi_podatke(tabele):
+    for t in tabele:
+        t.uvozi()
 
 def ustvari_bazo(conn):
     tabele = pripravi_tabele(conn)
     izbrisi_tabele(tabele)
     ustvari_tabele(tabele)
+    uvozi_podatke(tabele)
+
