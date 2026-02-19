@@ -39,9 +39,6 @@ class Tabela:
         return cur.lastrowid
 
 
-# -------------------------
-# MODEL: entitete (vrstice)
-# -------------------------
 
 class League:
     def __init__(self, league_id, name, season):
@@ -406,9 +403,7 @@ class PlayerMatchStats:
         """, {"player_id": self.player_id, "match_id": self.match_id})
 
 
-# -------------------------
-# BAZA: ustvarjanje + uvoz
-# -------------------------
+
 
 class LeagueTabela(Tabela):
     ime = "league"
