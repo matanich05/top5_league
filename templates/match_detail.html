@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Tekma {{ tekma['home_team'] }} - {{ tekma['away_team'] }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>{{ tekma['home_team'] }} vs {{ tekma['away_team'] }}</h2>
+    <p>
+        Liga:
+        <a href="/league/{{ tekma['league_id'] }}">{{ tekma['league_name'] }}</a>
+        ({{ tekma['season'] }})
+    </p>
+    <p>Datum: {{ tekma['match_date'] }}</p>
+    <p>Krog: {{ tekma['round_number'] or '-' }}</p>
+
+    <p class="score">
+        {% if tekma['home_goals'] is not none and tekma['away_goals'] is not none %}
+            {{ tekma['home_goals'] }} : {{ tekma['away_goals'] }}
+        {% else %}
+            Rezultat še ni vnešen
+        {% endif %}
+    </p>
+
+    <p>
+        <a href="/team/{{ tekma['home_team_id'] }}">{{ tekma['home_team'] }}</a>
+        |
+        <a href="/team/{{ tekma['away_team_id'] }}">{{ tekma['away_team'] }}</a>
+    </p>
+</div>
+
+<div class="card">
+    <h3>Statistika tekme</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Statistika</th>
+                <th>Domači</th>
+                <th>Gostje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Goli</td>
+                <td>{{ tekma['home_goals'] if tekma['home_goals'] is not none else '-' }}</td>
+                <td>{{ tekma['away_goals'] if tekma['away_goals'] is not none else '-' }}</td>
+            </tr>
+            <tr>
+                <td>Streli</td>
+                <td>{{ tekma['home_shots'] if tekma['home_shots'] is not none else '-' }}</td>
+                <td>{{ tekma['away_shots'] if tekma['away_shots'] is not none else '-' }}</td>
+            </tr>
+            <tr>
+                <td>Rumeni kartoni</td>
+                <td>{{ tekma['home_yellow'] if tekma['home_yellow'] is not none else '-' }}</td>
+                <td>{{ tekma['away_yellow'] if tekma['away_yellow'] is not none else '-' }}</td>
+            </tr>
+            <tr>
+                <td>Rdeči kartoni</td>
+                <td>{{ tekma['home_red'] if tekma['home_red'] is not none else '-' }}</td>
+                <td>{{ tekma['away_red'] if tekma['away_red'] is not none else '-' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h3>{{ tekma['home_team'] }} - igralci na tekmi</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Igralec</th>
+                <th>Pozicija</th>
+                <th>Min</th>
+                <th>G</th>
+                <th>A</th>
+                <th>R</th>
+                <th>RD</th>
+                <th>Ocena</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for igralec in home_players %}
+            <tr>
+                <td>
+                    <a href="/player/{{ igralec['player_id'] }}">{{ igralec['player_name'] }}</a>
+                </td>
+                <td>{{ igralec['position'] or '-' }}</td>
+                <td>{{ igralec['minutes_played'] }}</td>
+                <td>{{ igralec['goals'] }}</td>
+                <td>{{ igralec['assists'] }}</td>
+                <td>{{ igralec['yellow_cards'] }}</td>
+                <td>{{ igralec['red_cards'] }}</td>
+                <td>
+                    {% if igralec['rating'] is not none %}
+                        {{ "%.2f"|format(igralec['rating']) }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="8">Ni podatkov.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h3>{{ tekma['away_team'] }} - igralci na tekmi</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Igralec</th>
+                <th>Pozicija</th>
+                <th>Min</th>
+                <th>G</th>
+                <th>A</th>
+                <th>R</th>
+                <th>RD</th>
+                <th>Ocena</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for igralec in away_players %}
+            <tr>
+                <td>
+                    <a href="/player/{{ igralec['player_id'] }}">{{ igralec['player_name'] }}</a>
+                </td>
+                <td>{{ igralec['position'] or '-' }}</td>
+                <td>{{ igralec['minutes_played'] }}</td>
+                <td>{{ igralec['goals'] }}</td>
+                <td>{{ igralec['assists'] }}</td>
+                <td>{{ igralec['yellow_cards'] }}</td>
+                <td>{{ igralec['red_cards'] }}</td>
+                <td>
+                    {% if igralec['rating'] is not none %}
+                        {{ "%.2f"|format(igralec['rating']) }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="8">Ni podatkov.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

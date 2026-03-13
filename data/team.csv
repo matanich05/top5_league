@@ -1,3 +1,16 @@
 league_id,name,city,stadium,founded_year
 1,Manchester City,Manchester,Etihad Stadium,1880
 1,Arsenal,London,Emirates Stadium,1886
+1,Liverpool,Liverpool,Anfield,1892
+2,Real Madrid,Madrid,Santiago Bernabeu,1902
+2,Barcelona,Barcelona,Estadi Olimpic Lluis Companys,1899
+2,Atletico Madrid,Madrid,Civitas Metropolitano,1903
+3,PSG,Paris,Parc des Princes,1970
+3,Marseille,Marseille,Orange Velodrome,1899
+3,Monaco,Monaco,Stade Louis II,1924
+4,Bayern Munich,Munich,Allianz Arena,1900
+4,Borussia Dortmund,Dortmund,Signal Iduna Park,1909
+4,RB Leipzig,Leipzig,Red Bull Arena,2009
+5,Inter,Milan,San Siro,1908
+5,Juventus,Turin,Allianz Stadium,1897
+5,AC Milan,Milan,San Siro,1899

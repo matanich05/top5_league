@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Domov - Top 5 Leagues{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-box">
+        <h2 class="hero-title">Nogometni portal za top 5 evropskih lig</h2>
+        <p class="hero-text">
+            Ta projekt prikazuje lige, ekipe, igralce, tekme, rezultate, lestvico, top strelce in top asistente.
+            Narejen je kot poenostavljena verzija FlashScore oziroma SofaScore za eno sezono.
+        </p>
+        <div class="league-meta">
+            <span class="small-badge">Premier League</span>
+            <span class="small-badge">La Liga</span>
+            <span class="small-badge">Ligue 1</span>
+            <span class="small-badge">Bundesliga</span>
+            <span class="small-badge">Serie A</span>
+        </div>
+    </div>
+
+    <div class="hero-box">
+        <h3>Zadnje vnešene tekme</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Liga</th>
+                    <th>Tekma</th>
+                    <th>Rezultat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tekma in zadnje_tekme %}
+                <tr>
+                    <td>{{ tekma['league_name'] }}</td>
+                    <td>
+                        <a href="/match/{{ tekma['match_id'] }}">
+                            {{ tekma['home_team'] }} - {{ tekma['away_team'] }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if tekma['home_goals'] is not none and tekma['away_goals'] is not none %}
+                            {{ tekma['home_goals'] }} : {{ tekma['away_goals'] }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">Ni tekem.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="grid">
+    <div class="card">
+        <h2>Pregled lig</h2>
+        <p class="muted">
+            Izberi ligo za ogled lestvice, ekip in tekem.
+        </p>
+
+        <div class="grid">
+            {% for liga in lige %}
+            <div class="card">
+                <h3>
+                    <a href="/league/{{ liga['league_id'] }}">{{ liga['name'] }}</a>
+                </h3>
+                <p>Sezona: {{ liga['season'] }}</p>
+                <p>Število ekip: {{ liga['teams_count'] }}</p>
+                <p>Število tekem: {{ liga['matches_count'] }}</p>
+                <p>
+                    <a href="/league/{{ liga['league_id'] }}">Odpri ligo</a>
+                </p>
+            </div>
+            {% else %}
+            <div class="card">
+                <p>V bazi ni nobene lige.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Top strelci</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Igralec</th>
+                    <th>Ekipa</th>
+                    <th>Goli</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for igralec in top_strelci %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        <a href="/player/{{ igralec['player_id'] }}">{{ igralec['player_name'] }}</a>
+                    </td>
+                    <td>
+                        <a href="/team/{{ igralec['team_id'] }}">{{ igralec['team_name'] }}</a>
+                    </td>
+                    <td>{{ igralec['goals'] }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">Ni podatkov.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p style="margin-top: 14px;">
+            <a href="/top-scorers">Odpri celotno lestvico strelcev</a>
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>Top asistenti</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Igralec</th>
+                    <th>Ekipa</th>
+                    <th>Asistence</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for igralec in top_asistenti %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        <a href="/player/{{ igralec['player_id'] }}">{{ igralec['player_name'] }}</a>
+                    </td>
+                    <td>
+                        <a href="/team/{{ igralec['team_id'] }}">{{ igralec['team_name'] }}</a>
+                    </td>
+                    <td>{{ igralec['assists'] }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">Ni podatkov.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p style="margin-top: 14px;">
+            <a href="/top-assists">Odpri celotno lestvico asistentov</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

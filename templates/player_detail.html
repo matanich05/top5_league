@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{ igralec['name'] }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>{{ igralec['name'] }}</h2>
+    <p>Ekipa: <a href="/team/{{ igralec['team_id'] }}">{{ igralec['team_name'] }}</a></p>
+    <p>Liga: <a href="/league/{{ igralec['league_id'] }}">{{ igralec['league_name'] }}</a></p>
+    <p>Sezona: {{ igralec['season'] }}</p>
+    <p>Starost: {{ igralec['age'] or '-' }}</p>
+    <p>Narodnost: {{ igralec['nationality'] or '-' }}</p>
+    <p>Pozicija: {{ igralec['position'] or '-' }}</p>
+</div>
+
+<div class="card">
+    <h3>Skupna statistika</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Odigrane tekme</th>
+                <th>Goli</th>
+                <th>Asistence</th>
+                <th>Rumeni</th>
+                <th>Rdeči</th>
+                <th>Povp. ocena</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ statistika['matches_played'] }}</td>
+                <td>{{ statistika['total_goals'] }}</td>
+                <td>{{ statistika['total_assists'] }}</td>
+                <td>{{ statistika['total_yellow'] }}</td>
+                <td>{{ statistika['total_red'] }}</td>
+                <td>{{ "%.2f"|format(statistika['avg_rating']) }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

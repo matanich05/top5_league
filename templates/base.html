@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Top 5 Leagues{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #0f172a;
+            color: #e5e7eb;
+        }
+
+        header {
+            background: linear-gradient(90deg, #111827, #1f2937);
+            color: white;
+            padding: 20px 30px;
+            border-bottom: 1px solid #374151;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .brand {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .sub {
+            margin-top: 6px;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .nav-links {
+            margin-top: 14px;
+        }
+
+        .nav-links a {
+            display: inline-block;
+            margin-right: 12px;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            background-color: #1d4ed8;
+        }
+
+        .search-bar {
+            margin-top: 14px;
+        }
+
+        .search-bar form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .search-bar input {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background-color: #0b1220;
+            color: white;
+            min-width: 260px;
+        }
+
+        .search-bar button {
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: none;
+            background-color: #22c55e;
+            color: white;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #16a34a;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 20px;
+        }
+
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #111827;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #374151;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1f2937;
+            color: #f9fafb;
+        }
+
+        tr:hover td {
+            background-color: #172033;
+        }
+
+        .muted {
+            color: #94a3b8;
+        }
+
+        .small-badge {
+            display: inline-block;
+            background-color: #1d4ed8;
+            color: white;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+        }
+
+        .hero-box {
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .hero-title {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .hero-text {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .league-meta {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #93c5fd;
+        }
+
+        .filter-form {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-form select,
+        .filter-form button {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background-color: #0b1220;
+            color: white;
+        }
+
+        .filter-form button {
+            background-color: #2563eb;
+            border: none;
+            cursor: pointer;
+        }
+
+        .filter-form button:hover {
+            background-color: #1d4ed8;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            .brand {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <p class="brand"><a href="/">Top 5 Football Leagues</a></p>
+        <div class="sub">Mini FlashScore projekt za nogometne lige in rezultate</div>
+
+        <div class="nav-links">
+            <a href="/">Domov</a>
+            <a href="/matches">Vse tekme</a>
+            <a href="/top-scorers">Top strelci</a>
+            <a href="/top-assists">Top asistenti</a>
+        </div>
+
+        <div class="search-bar">
+            <form action="/search" method="get">
+                <input type="text" name="q" placeholder="Išči ekipo, igralca, narodnost ali pozicijo">
+                <button type="submit">Išči</button>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}{{ ekipa['name'] }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>{{ ekipa['name'] }}</h2>
+    <p>Liga: <a href="/league/{{ ekipa['league_id'] }}">{{ ekipa['league_name'] }}</a></p>
+    <p>Sezona: {{ ekipa['season'] }}</p>
+    <p>Mesto: {{ ekipa['city'] or '-' }}</p>
+    <p>Stadion: {{ ekipa['stadium'] or '-' }}</p>
+    <p>Leto ustanovitve: {{ ekipa['founded_year'] or '-' }}</p>
+</div>
+
+<div class="grid">
+    <div class="card">
+        <h3>Statistika ekipe</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>OD</th>
+                    <th>Z</th>
+                    <th>R</th>
+                    <th>P</th>
+                    <th>Goli</th>
+                    <th>Točke</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ team_stats['played'] or 0 }}</td>
+                    <td>{{ team_stats['wins'] or 0 }}</td>
+                    <td>{{ team_stats['draws'] or 0 }}</td>
+                    <td>{{ team_stats['losses'] or 0 }}</td>
+                    <td>{{ team_stats['goals_for'] or 0 }} : {{ team_stats['goals_against'] or 0 }}</td>
+                    <td><strong>{{ team_stats['points'] or 0 }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card">
+        <h3>Forma ekipe</h3>
+        <p>
+            {% for item in form %}
+                {% if item['result_code'] == 'W' %}
+                    <span class="small-badge" style="background-color:#16a34a;">W</span>
+                {% elif item['result_code'] == 'D' %}
+                    <span class="small-badge" style="background-color:#ca8a04;">D</span>
+                {% elif item['result_code'] == 'L' %}
+                    <span class="small-badge" style="background-color:#dc2626;">L</span>
+                {% else %}
+                    <span class="small-badge" style="background-color:#475569;">-</span>
+                {% end if %}
+            {% else %}
+                Ni podatkov.
+            {% endfor %}
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Najboljši strelec ekipe</h3>
+        {% if top_scorer %}
+            <p>
+                <a href="/player/{{ top_scorer['player_id'] }}">{{ top_scorer['player_name'] }}</a>
+            </p>
+            <p>Goli: <strong>{{ top_scorer['goals'] or 0 }}</strong></p>
+        {% else %}
+            <p>Ni podatkov.</p>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <h3>Najboljši asistent ekipe</h3>
+        {% if top_assistant %}
+            <p>
+                <a href="/player/{{ top_assistant['player_id'] }}">{{ top_assistant['player_name'] }}</a>
+            </p>
+            <p>Asistence: <strong>{{ top_assistant['assists'] or 0 }}</strong></p>
+        {% else %}
+            <p>Ni podatkov.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card">
+    <h3>Igralci</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ime</th>
+                <th>Starost</th>
+                <th>Narodnost</th>
+                <th>Pozicija</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for igralec in igralci %}
+            <tr>
+                <td>
+                    <a href="/player/{{ igralec['player_id'] }}">{{ igralec['name'] }}</a>
+                </td>
+                <td>{{ igralec['age'] or '-' }}</td>
+                <td>{{ igralec['nationality'] or '-' }}</td>
+                <td>{{ igralec['position'] or '-' }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Ni igralcev.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h3>Tekme ekipe</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Krog</th>
+                <th>Domači</th>
+                <th>Rezultat</th>
+                <th>Gostje</th>
+                <th>Izid</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tekma in tekme %}
+            <tr>
+                <td>{{ tekma['match_date'] }}</td>
+                <td>{{ tekma['round_number'] or '-' }}</td>
+                <td>{{ tekma['home_team'] }}</td>
+                <td>
+                    <a href="/match/{{ tekma['match_id'] }}">
+                        {% if tekma['home_goals'] is not none and tekma['away_goals'] is not none %}
+                            {{ tekma['home_goals'] }} : {{ tekma['away_goals'] }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </a>
+                </td>
+                <td>{{ tekma['away_team'] }}</td>
+                <td>
+                    {% if tekma['result_code'] == 'W' %}
+                        <strong style="color:#22c55e;">Zmaga</strong>
+                    {% elif tekma['result_code'] == 'D' %}
+                        <strong style="color:#facc15;">Remi</strong>
+                    {% elif tekma['result_code'] == 'L' %}
+                        <strong style="color:#ef4444;">Poraz</strong>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">Ni tekem.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

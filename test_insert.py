@@ -2,21 +2,21 @@ import sqlite3
 from src.baza import League, Team
 
 conn = sqlite3.connect("nogomet.db")
+conn.execute("PRAGMA foreign_keys = ON;")
 
 with conn:
-    league = League(conn)
-    team = Team(conn)
+    liga = League(None, "Premier League", "2024/2025")
+    league_id = liga.vstavi(conn)
 
-    # dodamo 1 ligo
-    league_id = league.dodaj_vrstico(name="Premier League", season="2024-25")
-
-    # dodamo 1 ekipo v to ligo
-    team.dodaj_vrstico(league_id=league_id, name="Liverpool", city="Liverpool", stadium="Anfield", founded_year=1892)
+    ekipa = Team(None, league_id, "Liverpool", "Liverpool", "Anfield", 1892)
+    ekipa.vstavi(conn)
 
 cur = conn.execute("""
     SELECT l.name, l.season, t.name
     FROM league l
-    JOIN team t ON t.league_id = l.league_id;
+    JOIN team t ON t.league_id = l.league_id
+    ORDER BY l.league_id, t.team_id;
 """)
+
 print(cur.fetchall())
 conn.close()

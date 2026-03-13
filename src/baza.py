@@ -1,6 +1,9 @@
 import csv
+from pathlib import Path
 
 PARAM_FMT = ":{}"
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
 
 
 class Tabela:
@@ -20,7 +23,12 @@ class Tabela:
     def uvozi(self, encoding="utf-8"):
         if self.podatki is None:
             return
-        with open(self.podatki, encoding=encoding, newline="") as f:
+
+        pot = DATA_DIR / self.podatki
+        if not pot.exists():
+            return
+
+        with open(pot, encoding=encoding, newline="") as f:
             reader = csv.DictReader(f)
             for row in reader:
                 row = {k: (None if v == "" else v) for k, v in row.items()}
@@ -39,7 +47,6 @@ class Tabela:
         return cur.lastrowid
 
 
-
 class League:
     def __init__(self, league_id, name, season):
         self.league_id = league_id
@@ -48,40 +55,54 @@ class League:
 
     @staticmethod
     def poisci_vse(conn):
-        cur = conn.execute("SELECT league_id, name, season FROM league ORDER BY league_id;")
-        for league_id, name, season in cur:
-            yield League(league_id, name, season)
+        cur = conn.execute("""
+            SELECT league_id, name, season
+            FROM league
+            ORDER BY league_id;
+        """)
+        for row in cur:
+            yield League(*row)
 
     @staticmethod
     def poisci_po_id(conn, league_id):
-        cur = conn.execute(
-            "SELECT league_id, name, season FROM league WHERE league_id = :league_id;",
-            {"league_id": league_id},
-        )
-        r = cur.fetchone()
-        if r is None:
+        cur = conn.execute("""
+            SELECT league_id, name, season
+            FROM league
+            WHERE league_id = :league_id;
+        """, {"league_id": league_id})
+        row = cur.fetchone()
+        if row is None:
             return None
-        return League(*r)
+        return League(*row)
 
     def vstavi(self, conn):
-        cur = conn.execute(
-            "INSERT INTO league (name, season) VALUES (:name, :season);",
-            {"name": self.name, "season": self.season},
-        )
+        cur = conn.execute("""
+            INSERT INTO league (name, season)
+            VALUES (:name, :season);
+        """, {
+            "name": self.name,
+            "season": self.season,
+        })
         self.league_id = cur.lastrowid
         return self.league_id
 
     def posodobi(self, conn):
-        conn.execute(
-            "UPDATE league SET name = :name, season = :season WHERE league_id = :league_id;",
-            {"name": self.name, "season": self.season, "league_id": self.league_id},
-        )
+        conn.execute("""
+            UPDATE league
+            SET name = :name,
+                season = :season
+            WHERE league_id = :league_id;
+        """, {
+            "league_id": self.league_id,
+            "name": self.name,
+            "season": self.season,
+        })
 
     def izbrisi(self, conn):
-        conn.execute(
-            "DELETE FROM league WHERE league_id = :league_id;",
-            {"league_id": self.league_id},
-        )
+        conn.execute("""
+            DELETE FROM league
+            WHERE league_id = :league_id;
+        """, {"league_id": self.league_id})
 
 
 class Team:
@@ -110,10 +131,21 @@ class Team:
             FROM team
             WHERE team_id = :team_id;
         """, {"team_id": team_id})
-        r = cur.fetchone()
-        if r is None:
+        row = cur.fetchone()
+        if row is None:
             return None
-        return Team(*r)
+        return Team(*row)
+
+    @staticmethod
+    def poisci_po_ligi(conn, league_id):
+        cur = conn.execute("""
+            SELECT team_id, league_id, name, city, stadium, founded_year
+            FROM team
+            WHERE league_id = :league_id
+            ORDER BY name;
+        """, {"league_id": league_id})
+        for row in cur:
+            yield Team(*row)
 
     def vstavi(self, conn):
         cur = conn.execute("""
@@ -139,16 +171,19 @@ class Team:
                 founded_year = :founded_year
             WHERE team_id = :team_id;
         """, {
+            "team_id": self.team_id,
             "league_id": self.league_id,
             "name": self.name,
             "city": self.city,
             "stadium": self.stadium,
             "founded_year": self.founded_year,
-            "team_id": self.team_id,
         })
 
     def izbrisi(self, conn):
-        conn.execute("DELETE FROM team WHERE team_id = :team_id;", {"team_id": self.team_id})
+        conn.execute("""
+            DELETE FROM team
+            WHERE team_id = :team_id;
+        """, {"team_id": self.team_id})
 
 
 class Player:
@@ -177,10 +212,21 @@ class Player:
             FROM player
             WHERE player_id = :player_id;
         """, {"player_id": player_id})
-        r = cur.fetchone()
-        if r is None:
+        row = cur.fetchone()
+        if row is None:
             return None
-        return Player(*r)
+        return Player(*row)
+
+    @staticmethod
+    def poisci_po_ekipi(conn, team_id):
+        cur = conn.execute("""
+            SELECT player_id, team_id, name, age, nationality, position
+            FROM player
+            WHERE team_id = :team_id
+            ORDER BY name;
+        """, {"team_id": team_id})
+        for row in cur:
+            yield Player(*row)
 
     def vstavi(self, conn):
         cur = conn.execute("""
@@ -206,16 +252,19 @@ class Player:
                 position = :position
             WHERE player_id = :player_id;
         """, {
+            "player_id": self.player_id,
             "team_id": self.team_id,
             "name": self.name,
             "age": self.age,
             "nationality": self.nationality,
             "position": self.position,
-            "player_id": self.player_id,
         })
 
     def izbrisi(self, conn):
-        conn.execute("DELETE FROM player WHERE player_id = :player_id;", {"player_id": self.player_id})
+        conn.execute("""
+            DELETE FROM player
+            WHERE player_id = :player_id;
+        """, {"player_id": self.player_id})
 
 
 class Match:
@@ -232,7 +281,7 @@ class Match:
         cur = conn.execute("""
             SELECT match_id, league_id, home_team_id, away_team_id, match_date, round_number
             FROM match
-            ORDER BY match_id;
+            ORDER BY match_date, match_id;
         """)
         for row in cur:
             yield Match(*row)
@@ -244,10 +293,21 @@ class Match:
             FROM match
             WHERE match_id = :match_id;
         """, {"match_id": match_id})
-        r = cur.fetchone()
-        if r is None:
+        row = cur.fetchone()
+        if row is None:
             return None
-        return Match(*r)
+        return Match(*row)
+
+    @staticmethod
+    def poisci_po_ligi(conn, league_id):
+        cur = conn.execute("""
+            SELECT match_id, league_id, home_team_id, away_team_id, match_date, round_number
+            FROM match
+            WHERE league_id = :league_id
+            ORDER BY round_number, match_date, match_id;
+        """, {"league_id": league_id})
+        for row in cur:
+            yield Match(*row)
 
     def vstavi(self, conn):
         cur = conn.execute("""
@@ -273,16 +333,19 @@ class Match:
                 round_number = :round_number
             WHERE match_id = :match_id;
         """, {
+            "match_id": self.match_id,
             "league_id": self.league_id,
             "home_team_id": self.home_team_id,
             "away_team_id": self.away_team_id,
             "match_date": self.match_date,
             "round_number": self.round_number,
-            "match_id": self.match_id,
         })
 
     def izbrisi(self, conn):
-        conn.execute("DELETE FROM match WHERE match_id = :match_id;", {"match_id": self.match_id})
+        conn.execute("""
+            DELETE FROM match
+            WHERE match_id = :match_id;
+        """, {"match_id": self.match_id})
 
 
 class MatchStats:
@@ -300,7 +363,8 @@ class MatchStats:
     @staticmethod
     def poisci_vse(conn):
         cur = conn.execute("""
-            SELECT match_id, home_goals, away_goals, home_shots, away_shots, home_yellow, away_yellow, home_red, away_red
+            SELECT match_id, home_goals, away_goals, home_shots, away_shots,
+                   home_yellow, away_yellow, home_red, away_red
             FROM match_stats
             ORDER BY match_id;
         """)
@@ -310,19 +374,26 @@ class MatchStats:
     @staticmethod
     def poisci_po_id(conn, match_id):
         cur = conn.execute("""
-            SELECT match_id, home_goals, away_goals, home_shots, away_shots, home_yellow, away_yellow, home_red, away_red
+            SELECT match_id, home_goals, away_goals, home_shots, away_shots,
+                   home_yellow, away_yellow, home_red, away_red
             FROM match_stats
             WHERE match_id = :match_id;
         """, {"match_id": match_id})
-        r = cur.fetchone()
-        if r is None:
+        row = cur.fetchone()
+        if row is None:
             return None
-        return MatchStats(*r)
+        return MatchStats(*row)
 
     def vstavi(self, conn):
         conn.execute("""
-            INSERT INTO match_stats (match_id, home_goals, away_goals, home_shots, away_shots, home_yellow, away_yellow, home_red, away_red)
-            VALUES (:match_id, :home_goals, :away_goals, :home_shots, :away_shots, :home_yellow, :away_yellow, :home_red, :away_red);
+            INSERT INTO match_stats (
+                match_id, home_goals, away_goals, home_shots, away_shots,
+                home_yellow, away_yellow, home_red, away_red
+            )
+            VALUES (
+                :match_id, :home_goals, :away_goals, :home_shots, :away_shots,
+                :home_yellow, :away_yellow, :home_red, :away_red
+            );
         """, self.__dict__)
         return self.match_id
 
@@ -341,7 +412,10 @@ class MatchStats:
         """, self.__dict__)
 
     def izbrisi(self, conn):
-        conn.execute("DELETE FROM match_stats WHERE match_id = :match_id;", {"match_id": self.match_id})
+        conn.execute("""
+            DELETE FROM match_stats
+            WHERE match_id = :match_id;
+        """, {"match_id": self.match_id})
 
 
 class PlayerMatchStats:
@@ -358,7 +432,8 @@ class PlayerMatchStats:
     @staticmethod
     def poisci_vse(conn):
         cur = conn.execute("""
-            SELECT player_id, match_id, minutes_played, goals, assists, yellow_cards, red_cards, rating
+            SELECT player_id, match_id, minutes_played, goals, assists,
+                   yellow_cards, red_cards, rating
             FROM player_match_stats
             ORDER BY player_id, match_id;
         """)
@@ -368,19 +443,26 @@ class PlayerMatchStats:
     @staticmethod
     def poisci_po_id(conn, player_id, match_id):
         cur = conn.execute("""
-            SELECT player_id, match_id, minutes_played, goals, assists, yellow_cards, red_cards, rating
+            SELECT player_id, match_id, minutes_played, goals, assists,
+                   yellow_cards, red_cards, rating
             FROM player_match_stats
             WHERE player_id = :player_id AND match_id = :match_id;
         """, {"player_id": player_id, "match_id": match_id})
-        r = cur.fetchone()
-        if r is None:
+        row = cur.fetchone()
+        if row is None:
             return None
-        return PlayerMatchStats(*r)
+        return PlayerMatchStats(*row)
 
     def vstavi(self, conn):
         conn.execute("""
-            INSERT INTO player_match_stats (player_id, match_id, minutes_played, goals, assists, yellow_cards, red_cards, rating)
-            VALUES (:player_id, :match_id, :minutes_played, :goals, :assists, :yellow_cards, :red_cards, :rating);
+            INSERT INTO player_match_stats (
+                player_id, match_id, minutes_played, goals, assists,
+                yellow_cards, red_cards, rating
+            )
+            VALUES (
+                :player_id, :match_id, :minutes_played, :goals, :assists,
+                :yellow_cards, :red_cards, :rating
+            );
         """, self.__dict__)
         return (self.player_id, self.match_id)
 
@@ -400,14 +482,15 @@ class PlayerMatchStats:
         conn.execute("""
             DELETE FROM player_match_stats
             WHERE player_id = :player_id AND match_id = :match_id;
-        """, {"player_id": self.player_id, "match_id": self.match_id})
-
-
+        """, {
+            "player_id": self.player_id,
+            "match_id": self.match_id,
+        })
 
 
 class LeagueTabela(Tabela):
     ime = "league"
-    podatki = "data/league.csv"
+    podatki = "league.csv"
 
     def ustvari(self):
         self.conn.execute("""
@@ -422,18 +505,18 @@ class LeagueTabela(Tabela):
 
 class TeamTabela(Tabela):
     ime = "team"
-    podatki = "data/team.csv"
+    podatki = "team.csv"
 
     def ustvari(self):
         self.conn.execute("""
             CREATE TABLE team (
                 team_id      INTEGER PRIMARY KEY AUTOINCREMENT,
                 league_id    INTEGER NOT NULL,
-                name         TEXT    NOT NULL,
+                name         TEXT NOT NULL,
                 city         TEXT,
                 stadium      TEXT,
                 founded_year INTEGER,
-                FOREIGN KEY (league_id) REFERENCES league(league_id),
+                FOREIGN KEY (league_id) REFERENCES league(league_id) ON DELETE CASCADE,
                 UNIQUE(league_id, name)
             );
         """)
@@ -441,18 +524,18 @@ class TeamTabela(Tabela):
 
 class PlayerTabela(Tabela):
     ime = "player"
-    podatki = "data/player.csv"
+    podatki = "player.csv"
 
     def ustvari(self):
         self.conn.execute("""
             CREATE TABLE player (
                 player_id    INTEGER PRIMARY KEY AUTOINCREMENT,
                 team_id      INTEGER NOT NULL,
-                name         TEXT    NOT NULL,
+                name         TEXT NOT NULL,
                 age          INTEGER,
                 nationality  TEXT,
                 position     TEXT,
-                FOREIGN KEY (team_id) REFERENCES team(team_id),
+                FOREIGN KEY (team_id) REFERENCES team(team_id) ON DELETE CASCADE,
                 UNIQUE(team_id, name)
             );
         """)
@@ -460,7 +543,7 @@ class PlayerTabela(Tabela):
 
 class MatchTabela(Tabela):
     ime = "match"
-    podatki = "data/match.csv"
+    podatki = "match.csv"
 
     def ustvari(self):
         self.conn.execute("""
@@ -469,11 +552,11 @@ class MatchTabela(Tabela):
                 league_id     INTEGER NOT NULL,
                 home_team_id  INTEGER NOT NULL,
                 away_team_id  INTEGER NOT NULL,
-                match_date    TEXT    NOT NULL,
+                match_date    TEXT NOT NULL,
                 round_number  INTEGER,
-                FOREIGN KEY (league_id) REFERENCES league(league_id),
-                FOREIGN KEY (home_team_id) REFERENCES team(team_id),
-                FOREIGN KEY (away_team_id) REFERENCES team(team_id),
+                FOREIGN KEY (league_id) REFERENCES league(league_id) ON DELETE CASCADE,
+                FOREIGN KEY (home_team_id) REFERENCES team(team_id) ON DELETE CASCADE,
+                FOREIGN KEY (away_team_id) REFERENCES team(team_id) ON DELETE CASCADE,
                 CHECK (home_team_id != away_team_id)
             );
         """)
@@ -481,7 +564,7 @@ class MatchTabela(Tabela):
 
 class MatchStatsTabela(Tabela):
     ime = "match_stats"
-    podatki = "data/match_stats.csv"
+    podatki = "match_stats.csv"
 
     def ustvari(self):
         self.conn.execute("""
@@ -495,29 +578,29 @@ class MatchStatsTabela(Tabela):
                 away_yellow  INTEGER DEFAULT 0,
                 home_red     INTEGER DEFAULT 0,
                 away_red     INTEGER DEFAULT 0,
-                FOREIGN KEY (match_id) REFERENCES match(match_id)
+                FOREIGN KEY (match_id) REFERENCES match(match_id) ON DELETE CASCADE
             );
         """)
 
 
 class PlayerMatchStatsTabela(Tabela):
     ime = "player_match_stats"
-    podatki = "data/player_match_stats.csv"
+    podatki = "player_match_stats.csv"
 
     def ustvari(self):
         self.conn.execute("""
             CREATE TABLE player_match_stats (
-                player_id        INTEGER NOT NULL,
-                match_id         INTEGER NOT NULL,
-                minutes_played   INTEGER DEFAULT 0,
-                goals            INTEGER DEFAULT 0,
-                assists          INTEGER DEFAULT 0,
-                yellow_cards     INTEGER DEFAULT 0,
-                red_cards        INTEGER DEFAULT 0,
-                rating           REAL,
+                player_id      INTEGER NOT NULL,
+                match_id       INTEGER NOT NULL,
+                minutes_played INTEGER DEFAULT 0,
+                goals          INTEGER DEFAULT 0,
+                assists        INTEGER DEFAULT 0,
+                yellow_cards   INTEGER DEFAULT 0,
+                red_cards      INTEGER DEFAULT 0,
+                rating         REAL,
                 PRIMARY KEY (player_id, match_id),
-                FOREIGN KEY (player_id) REFERENCES player(player_id),
-                FOREIGN KEY (match_id) REFERENCES match(match_id)
+                FOREIGN KEY (player_id) REFERENCES player(player_id) ON DELETE CASCADE,
+                FOREIGN KEY (match_id) REFERENCES match(match_id) ON DELETE CASCADE
             );
         """)
 
@@ -534,21 +617,22 @@ def pripravi_tabele(conn):
 
 
 def ustvari_tabele(tabele):
-    for t in tabele:
-        t.ustvari()
+    for tabela in tabele:
+        tabela.ustvari()
 
 
 def izbrisi_tabele(tabele):
-    for t in tabele:
-        t.izbrisi_tabelo()
+    for tabela in reversed(tabele):
+        tabela.izbrisi_tabelo()
 
 
 def uvozi_podatke(tabele):
-    for t in tabele:
-        t.uvozi()
+    for tabela in tabele:
+        tabela.uvozi()
 
 
 def ustvari_bazo(conn):
+    conn.execute("PRAGMA foreign_keys = ON;")
     tabele = pripravi_tabele(conn)
     izbrisi_tabele(tabele)
     ustvari_tabele(tabele)

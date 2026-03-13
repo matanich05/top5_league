@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Top strelci{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Top strelci</h2>
+    <p class="muted">
+        Tukaj je skupna lestvica strelcev iz vseh lig.
+    </p>
+</div>
+
+<div class="card">
+    <h3>Filtriranje po ligi</h3>
+    <form class="filter-form" method="get" action="/top-scorers">
+        <select name="league_id">
+            <option value="">Vse lige</option>
+            {% for liga in lige %}
+            <option value="{{ liga['league_id'] }}" {% if selected_league_id == liga['league_id']|string %}selected{% endif %}>
+                {{ liga['name'] }} ({{ liga['season'] }})
+            </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filtriraj</button>
+    </form>
+</div>
+
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Igralec</th>
+                <th>Pozicija</th>
+                <th>Ekipa</th>
+                <th>Liga</th>
+                <th>Tekme</th>
+                <th>Goli</th>
+                <th>Asistence</th>
+                <th>Povp. ocena</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for igralec in strelci %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    <a href="/player/{{ igralec['player_id'] }}">{{ igralec['player_name'] }}</a>
+                </td>
+                <td>{{ igralec['position'] or '-' }}</td>
+                <td>
+                    <a href="/team/{{ igralec['team_id'] }}">{{ igralec['team_name'] }}</a>
+                </td>
+                <td>
+                    <a href="/league/{{ igralec['league_id'] }}">{{ igralec['league_name'] }}</a>
+                </td>
+                <td>{{ igralec['matches_played'] }}</td>
+                <td><strong>{{ igralec['goals'] }}</strong></td>
+                <td>{{ igralec['assists'] }}</td>
+                <td>{{ "%.2f"|format(igralec['avg_rating']) }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="9">Ni podatkov.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -2,7 +2,12 @@ import sqlite3
 from src.baza import Player
 
 conn = sqlite3.connect("nogomet.db")
-cur = conn.execute("SELECT player_id, team_id, name, age, nationality, position FROM player;")
+
+cur = conn.execute("""
+    SELECT player_id, team_id, name, age, nationality, position
+    FROM player
+    ORDER BY player_id;
+""")
 print(cur.fetchall())
 
 print("---- model (yield) ----")

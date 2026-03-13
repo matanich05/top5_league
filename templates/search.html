@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Iskanje{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Iskanje</h2>
+    {% if q %}
+        <p class="muted">Rezultati za: <strong>{{ q }}</strong></p>
+    {% else %}
+        <p class="muted">Vpiši iskalni niz v zgornje polje.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3>Najdene ekipe</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ekipa</th>
+                <th>Mesto</th>
+                <th>Liga</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ekipa in ekipe %}
+            <tr>
+                <td>
+                    <a href="/team/{{ ekipa['team_id'] }}">{{ ekipa['team_name'] }}</a>
+                </td>
+                <td>{{ ekipa['city'] or '-' }}</td>
+                <td>
+                    <a href="/league/{{ ekipa['league_id'] }}">{{ ekipa['league_name'] }}</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">Ni najdenih ekip.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h3>Najdeni igralci</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Igralec</th>
+                <th>Pozicija</th>
+                <th>Ekipa</th>
+                <th>Liga</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for igralec in igralci %}
+            <tr>
+                <td>
+                    <a href="/player/{{ igralec['player_id'] }}">{{ igralec['player_name'] }}</a>
+                </td>
+                <td>{{ igralec['position'] or '-' }}</td>
+                <td>
+                    <a href="/team/{{ igralec['team_id'] }}">{{ igralec['team_name'] }}</a>
+                </td>
+                <td>
+                    <a href="/league/{{ igralec['league_id'] }}">{{ igralec['league_name'] }}</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Ni najdenih igralcev.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
