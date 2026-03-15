@@ -1,31 +1,571 @@
 team_id,name,age,nationality,position
-1,Erling Haaland,24,Norway,ST
-1,Kevin De Bruyne,33,Belgium,CM
-2,Bukayo Saka,23,England,RW
-2,Martin Odegaard,25,Norway,CAM
-3,Mohamed Salah,32,Egypt,RW
-3,Virgil van Dijk,33,Netherlands,CB
-4,Jude Bellingham,21,England,CAM
-4,Vinicius Junior,24,Brazil,LW
-5,Robert Lewandowski,36,Poland,ST
-5,Pedri,21,Spain,CM
-6,Antoine Griezmann,33,France,ST
-6,Jan Oblak,31,Slovenia,GK
-7,Kylian Mbappe,25,France,ST
-7,Ousmane Dembele,27,France,RW
-8,Pierre-Emerick Aubameyang,35,Gabon,ST
-8,Amine Harit,27,Morocco,CAM
-9,Wissam Ben Yedder,34,France,ST
-9,Aleksandr Golovin,28,Russia,CM
-10,Harry Kane,31,England,ST
-10,Jamal Musiala,21,Germany,CAM
-11,Julian Brandt,28,Germany,CAM
-11,Karim Adeyemi,22,Germany,ST
-12,Lois Openda,24,Belgium,ST
-12,Dani Olmo,26,Spain,CAM
-13,Lautaro Martinez,27,Argentina,ST
-13,Nicolo Barella,27,Italy,CM
-14,Dusan Vlahovic,24,Serbia,ST
-14,Federico Chiesa,27,Italy,RW
-15,Rafael Leao,25,Portugal,LW
-15,Theo Hernandez,27,France,LB
+2,Viktor Gyokeres,27,Sweden,ST
+2,Bukayo Saka,24,England,RW
+2,Gabriel Jesus,28,Brazil,ST
+2,Gabriel Martinelli,24,Brazil,LW
+2,Kai Havertz,26,Germany,ST
+2,Eberechi Eze,27,England,AM
+2,Leandro Trossard,31,Belgium,LW
+2,Martin Odegaard,27,Norway,CM
+2,Declan Rice,27,England,CM
+2,Noni Madueke,24,England,RW
+2,Mikel Merino,29,Spain,CM
+2,Martin Zubimendi,27,Spain,CM
+2,Max Dowman,17,England,CM
+2,Christian Norgaard,32,Denmark,CM
+2,Andre Harriman-Annous,18,England,ST
+2,Ife Ibrahim,18,England,CM
+2,Gabriel Magalhaes,28,Brazil,CB
+2,William Saliba,24,France,CB
+2,Piero Hincapie,24,Ecuador,LB
+2,Riccardo Calafiori,23,Italy,LB
+2,Jurrien Timber,24,Netherlands,RB
+2,Myles Lewis-Skelly,19,England,LB
+2,Cristhian Mosquera,21,Spain,CB
+2,Ben White,28,England,RB
+2,Marli Salmon,17,England,CB
+2,David Raya,30,Spain,GK
+2,Kepa Arrizabalaga,31,Spain,GK
+2,Tommy Setford,20,England,GK
+2,Khari Ranson,18,England,GK
+3,Erling Haaland,25,Norway,ST
+3,Omar Marmoush,27,Egypt,ST
+3,Phil Foden,25,England,AM
+3,Antoine Semenyo,26,Ghana,LW
+3,Rodri,29,Spain,DM
+3,Rayan Cherki,22,France,AM
+3,Jeremy Doku,23,Belgium,LW
+3,Bernardo Silva,31,Portugal,CM
+3,Savinho,21,Brazil,RW
+3,Rayan Ait-Nouri,24,Algeria,LB
+3,Tijjani Reijnders,27,Netherlands,CM
+3,Mateo Kovacic,31,Croatia,CM
+3,Nico Gonzalez,24,Spain,CM
+3,Sverre Nypan,19,Norway,CM
+3,Abdukodir Khusanov,22,Uzbekistan,CB
+3,Josko Gvardiol,24,Croatia,CB
+3,Ruben Dias,28,Portugal,CB
+3,Marc Guehi,25,England,CB
+3,John Stones,31,England,CB
+3,Nathan Ake,31,Netherlands,CB
+3,Nico OReilly,20,England,LB
+3,Matheus Nunes,27,Portugal,RB
+3,Rico Lewis,21,England,RB
+3,Max Alleyne,20,England,CB
+3,Gianluigi Donnarumma,27,Italy,GK
+3,James Trafford,23,England,GK
+3,Marcus Bettinelli,33,England,GK
+17,Amad Diallo,23,Ivory Coast,RW
+17,Benjamin Sesko,22,Slovenia,ST
+17,Matheus Cunha,26,Brazil,ST
+17,Joshua Zirkzee,24,Netherlands,ST
+17,Chido Obi-Martin,18,Denmark,ST
+17,Bruno Fernandes,31,Portugal,AM
+17,Bryan Mbeumo,26,Cameroon,RW
+17,Casemiro,34,Brazil,DM
+17,Kobbie Mainoo,20,England,CM
+17,Mason Mount,27,England,AM
+17,Patrick Dorgu,21,Denmark,LB
+17,Diogo Dalot,26,Portugal,RB
+17,Manuel Ugarte,24,Uruguay,DM
+17,Tyler Fletcher,18,Scotland,CM
+17,Noussair Mazraoui,28,Morocco,RB
+17,Lisandro Martinez,28,Argentina,CB
+17,Matthijs de Ligt,26,Netherlands,CB
+17,Harry Maguire,33,England,CB
+17,Leny Yoro,20,France,CB
+17,Luke Shaw,30,England,LB
+17,Ayden Heaven,19,England,CB
+17,Diego Leon,18,Paraguay,LB
+17,Tyrell Malacia,26,Netherlands,LB
+17,Tyler Fredricson,21,England,CB
+17,Godwill Kukonki,18,England,CB
+17,Senne Lammens,23,Belgium,GK
+17,Altay Bayindir,27,Turkey,GK
+17,Tom Heaton,39,England,GK
+41,Ousmane Dembele,28,France,RW
+41,Khvicha Kvaratskhelia,25,Georgia,LW
+41,Desire Doue,20,France,RW
+41,Bradley Barcola,23,France,LW
+41,Ibrahim Mbaye,18,Senegal,RW
+41,Goncalo Ramos,24,Portugal,ST
+41,Quentin Ndjantou,18,France,CM
+41,Dro Fernandez,18,Spain,AM
+41,Vitinha,26,Portugal,CM
+41,Joao Neves,21,Portugal,CM
+41,Fabian Ruiz,29,Spain,CM
+41,Senny Mayulu,19,France,CM
+41,Kang-in Lee,25,South Korea,RW
+41,Warren Zaire-Emery,20,France,CM
+41,Achraf Hakimi,27,Morocco,RB
+41,Nuno Mendes,23,Portugal,LB
+41,Marquinhos,31,Brazil,CB
+41,Willian Pacho,24,Ecuador,CB
+41,Lucas Beraldo,22,Brazil,CB
+41,Ilya Zabarnyi,23,Ukraine,CB
+41,Lucas Hernandez,30,France,LB
+41,Lucas Chevalier,24,France,GK
+41,Matvey Safonov,27,Russia,GK
+41,Renato Marin,19,Italy,GK
+42,Mason Greenwood,24,England,RW
+42,Pierre-Emerick Aubameyang,36,Gabon,ST
+42,Amine Gouiri,26,Algeria,ST
+42,Igor Paixao,25,Brazil,LW
+42,Ethan Nwaneri,18,England,CM
+42,Timothy Weah,26,USA,RW
+42,Quinten Timber,24,Netherlands,CM
+42,Himad Abdelli,26,Algeria,CM
+42,Bilal Nadir,22,Morocco,CM
+42,Arthur Vermeeren,21,Belgium,CM
+42,Pierre-Emile Hojbjerg,30,Denmark,CM
+42,Hamed Junior Traore,26,Ivory Coast,AM
+42,Geoffrey Kondogbia,33,Central African Republic,CM
+42,Tochukwu Nnadi,22,Nigeria,CM
+42,Nayef Aguerd,29,Morocco,CB
+42,Benjamin Pavard,29,France,CB
+42,Leonardo Balerdi,27,Argentina,CB
+42,Facundo Medina,26,Argentina,CB
+42,Emerson Palmieri,31,Italy,LB
+42,Conrad Jaden Egan-Riley,23,England,CB
+42,Geronimo Rulli,33,Argentina,GK
+42,Jeffrey de Lange,27,Netherlands,GK
+42,Jelle Van Neck,22,Belgium,GK
+42,Theo Vermot,29,France,GK
+43,Ansu Fati,23,Spain,LW
+43,Folarin Balogun,24,USA,ST
+43,Mika Biereth,23,Denmark,ST
+43,Paris Brunner,20,Germany,LW
+43,Paul Pogba,33,France,CM
+43,Simon Adingra,24,Ivory Coast,RW
+43,Lamine Camara,22,Senegal,CM
+43,Krepin Diatta,27,Senegal,RW
+43,Aleksandr Golovin,29,Russia,AM
+43,Takumi Minamino,31,Japan,AM
+43,Maghnes Akliouche,24,France,RW
+43,Denis Zakaria,29,Switzerland,CM
+43,Mamadou Coulibaly,21,France,CM
+43,Aladji Bamba,19,France,CM
+43,Stanis Idumbo Muzambo,20,Belgium,CM
+43,Vanderson,24,Brazil,RB
+43,Mohammed Salisu,26,Ghana,CB
+43,Eric Dier,32,England,CB
+43,Caio Henrique,28,Brazil,LB
+43,Thilo Kehrer,29,Germany,CB
+43,Wout Faes,27,Belgium,CB
+43,Jordan Teze,26,Netherlands,RB
+43,Christian Mawissa,20,France,CB
+43,Kassoum Ouattara,21,France,LB
+43,Lukas Hradecky,36,Finland,GK
+43,Philipp Kohn,27,Switzerland,GK
+43,Yann Lienard,22,France,GK
+43,Jules Stawiecki,18,France,GK
+44,Elye Wahi,23,France,ST
+44,Mohamed-Ali Cho,22,France,ST
+44,Tiago Gouveia,24,Portugal,RW
+44,Kevin Carlos Omoruyi,24,Spain,ST
+44,Isak Jansson,24,Sweden,LW
+44,Zoumana Diallo,21,France,ST
+44,Hicham Boudaoui,26,Algeria,CM
+44,Ali Abdi,32,Tunisia,LB
+44,Sofiane Diop,25,Morocco,AM
+44,Tanguy Ndombele,29,France,CM
+44,Salis Abdul Samed,25,Ghana,CM
+44,Jonathan Clauss,33,France,RB
+44,Charles Vanhoutte,27,Belgium,CM
+44,Morgan Sanson,31,France,CM
+44,Tom Louchet,22,France,RM
+44,Gabin Bernardeau,20,France,CM
+44,Djibril Coulibaly,17,France,CM
+44,Raoul Louche,22,France,CM
+44,Mohamed Abdelmonem,27,Egypt,CB
+44,Antoine Mendy,21,Senegal,RB
+44,Abdoulay Juma Bah,19,Sierra Leone,CB
+44,Youssouf Ndayishimiye,27,Burundi,CB
+44,Kojo Peprah Oppong,21,Ghana,CB
+44,Dante,42,Brazil,CB
+44,Moise Bombito,25,Canada,CB
+44,Melvin Bard,25,France,LB
+44,Yehvann Diouf,26,Senegal,GK
+44,Maxime Dupe,33,France,GK
+44,Bartosz Zelazowski,20,Poland,GK
+45,Olivier Giroud,39,France,ST
+45,Hamza Igamane,23,Morocco,ST
+45,Matias Fernandez,21,Spain,ST
+45,Marius Broholm,21,Norway,RW
+45,Noah Edjouma,20,France,RW
+45,Soriba Diaoune,18,Guinea,ST
+45,Matah Yondjo,19,Cameroon,ST
+45,Ethan Mbappe,19,France,CM
+45,Nabil Bentaleb,31,Algeria,CM
+45,Ngalayel Mukau,21,DR Congo,CM
+45,Osame Sahraoui,24,Morocco,LW
+45,Ayyoub Bouaddi,18,France,CM
+45,Hakon Arnar Haraldsson,22,Iceland,AM
+45,Felix Correia,25,Portugal,LW
+45,Benjamin Andre,35,France,CM
+45,Gaetan Perrin,29,France,RW
+45,Lilian Baret,19,France,CM
+45,Chancel Mbemba,31,DR Congo,CB
+45,Calvin Verdonk,28,Indonesia,LB
+45,Aissa Mandi,34,Algeria,CB
+45,Alexsandro Ribeiro,26,Brazil,CB
+45,Thomas Meunier,34,Belgium,RB
+45,Nathan Ngoy,22,Belgium,CB
+45,Tiago Santos,23,Portugal,RB
+45,Romain Perraud,28,France,LB
+45,Rafael Fernandes,23,Portugal,CB
+45,Ousmane Toure,21,France,CB
+45,Maxime Goffi,18,France,CB
+45,Berke Ozer,25,Turkey,GK
+45,Arnaud Bodart,28,Belgium,GK
+45,Marc-Aurele Caillard,31,France,GK
+45,Zadig Lanssade,18,France,GK
+46,Endrick,19,Brazil,ST
+46,Ernest Nuamah,22,Ghana,RW
+46,Roman Yaremchuk,30,Ukraine,ST
+46,Pavel Sulc,25,Czech Republic,AM
+46,Afonso Moreira,20,Portugal,LW
+46,Adil Hamdani,17,France,ST
+46,Tyler Morton,23,England,CM
+46,Malick Fofana,20,Belgium,LW
+46,Khalis Merah,19,France,CM
+46,Corentin Tolisso,31,France,CM
+46,Rachid Ghezzal,33,Algeria,RW
+46,Noah Nartey,20,Denmark,CM
+46,Orel Mangala,27,Belgium,CM
+46,Adam Karabec,22,Czech Republic,RW
+46,Tanner Tessmann,24,USA,CM
+46,Remi Himbert,18,France,RW
+46,Mathys de Carvalho,20,Portugal,CM
+46,Tiago Goncalves,19,France,CM
+46,Nicolas Tagliafico,33,Argentina,LB
+46,Moussa Niakhate,30,Senegal,CB
+46,Abner Vinicius,25,Brazil,LB
+46,Noham Kamara,19,France,CB
+46,Ruben Kluivert,24,Netherlands,CB
+46,Ainsley Maitland-Niles,28,England,RB
+46,Clinton Mata,33,Angola,RB
+46,Achraf Laaziri,22,Morocco,LB
+46,Hans Hateboer,32,Netherlands,RB
+46,Prince Mbatshi Mukuba,20,DR Congo,CB
+46,Steeve Kango,19,France,CB
+46,Dominik Greif,28,Slovakia,GK
+46,Lassine Diarra,23,Mali,GK
+46,Remy Descamps,29,France,GK
+46,Yvann Konan,19,Ivory Coast,GK
+47,Joaquin Panichelli,23,Argentina,ST
+47,Emmanuel Emegha,22,Netherlands,ST
+47,David Datro Fofana,23,Ivory Coast,ST
+47,Martial Godo,23,Ivory Coast,LW
+47,Samuel Amo-Ameyaw,19,England,RW
+47,Ghianny Kodjia,18,France,ST
+47,Jean-Baptiste Bosey,18,Congo,ST
+47,Julio Enciso,22,Paraguay,AM
+47,Valentin Barco,21,Argentina,CM
+47,Gessime Yassine,20,Morocco,RW
+47,Diego Moreira,21,Belgium,LW
+47,Maxi Oyedele,21,Poland,CM
+47,Mathis Amougou,20,France,CM
+47,Samir El Mourabet,20,Morocco,CM
+47,Sebastian Nanasi,23,Sweden,LW
+47,Abdoul Ouattara,20,Ivory Coast,CM
+47,Rafael Luis,21,Portugal,CM
+47,Junior Mwanga,22,France,CM
+47,Max Marechal,18,France,CM
+47,Aaron Anselmino,20,Argentina,CB
+47,Ben Chilwell,29,England,LB
+47,Guela Doue,23,Ivory Coast,CB
+47,Lucas Hogsberg,19,Denmark,CB
+47,Ismael Doukoure,22,France,CB
+47,Andrew Omobamidele,23,Ireland,CB
+47,Mike Penders,20,Belgium,GK
+47,Karl-Johan Johnsson,36,Sweden,GK
+47,Stefan Bajic,24,France,GK
+47,Gabriel Kerckaert,18,France,GK
+48,Allan Saint-Maximin,29,France,LW
+48,Florian Thauvin,33,France,ST
+48,Odsonne Edouard,28,France,ST
+48,Abdallah Sima,24,Senegal,LW
+48,Wesley Said,30,France,ST
+48,Florian Sotoca,35,France,ST
+48,Rayan Fofana,20,France,ST
+48,Erawan Garnier,20,Thailand,ST
+48,Amadou Haidara,28,Mali,CM
+48,Mamadou Sangare,23,Mali,CM
+48,Andrija Bulatovic,19,Montenegro,CM
+48,Adrien Thomasson,32,France,CM
+48,Fode Sylla,19,France,CM
+48,Ruben Aguilar,32,France,RB
+48,Anthony Bermont,21,France,AM
+48,Arthur Masuaku,32,DR Congo,LB
+48,Saud Abdulhamid,26,Saudi Arabia,RB
+48,Ismaelo Ganiou,21,Burkina Faso,CB
+48,Malang Sarr,27,France,CB
+48,Samson Baidoo,21,Austria,CB
+48,Nidal Celik,19,Bosnia and Herzegovina,CB
+48,Matthieu Udol,29,France,LB
+48,Jonathan Gradit,33,France,CB
+48,Kylian Antonio,18,France,RB
+48,Robin Risser,21,France,GK
+48,Ilan Jourdren,17,France,GK
+48,Mathieu Gorgelin,35,France,GK
+48,Regis Gurtner,39,France,GK
+49,Ludovic Ajorque,32,France,ST
+49,Mama Balde,30,Guinea-Bissau,ST
+49,Remy Labeau Lascary,23,Guadeloupe,ST
+49,Serigne Diop,20,Senegal,ST
+49,Kamory Doumbia,23,Mali,AM
+49,Junior Dina Ebimbe,25,Cameroon,CM
+49,Pathe Mboup,22,Senegal,LW
+49,Hamidou Makalou,19,Mali,CM
+49,Romain Del Castillo,29,France,RW
+49,Joris Chotard,24,France,CM
+49,Lucas Tousart,28,France,CM
+49,Hugo Magnetti,27,France,CM
+49,Soumaila Coulibaly,22,France,CB
+49,Daouda Guindo,23,Mali,LB
+49,Luc Zogbe,20,Ivory Coast,RB
+49,Bradley Locko,23,France,LB
+49,Kenny Lala,34,France,RB
+49,Michel Diaz,22,Ivory Coast,CB
+49,Brendan Chardonnet,31,France,CB
+49,Raphael Le Guen,19,France,CB
+49,Radoslaw Majecki,26,Poland,GK
+49,Gregoire Coudert,26,France,GK
+49,Noah Jauny,21,Ireland,GK
+50,Frank Magri,26,Cameroon,ST
+50,Yann Gboho,25,France,AM
+50,Santiago Hidalgo,21,Argentina,RW
+50,Emersonn,21,Brazil,ST
+50,Jaceen Russell-Rowe,23,Canada,ST
+50,Julian Vignolo,19,Argentina,ST
+50,Enzo Faty,19,France,ST
+50,Pape Diop,22,Senegal,CM
+50,Abu Francis,24,Ghana,CM
+50,Cristian Casseres Jr,26,Venezuela,CM
+50,Rafik Messali,22,Algeria,RM
+50,Aron Donnum,27,Norway,RM
+50,Mario Sauer,21,Slovakia,CM
+50,Dayann Methalie,20,France,CB
+50,Alexis Vossah,18,France,DM
+50,Warren Kamanzi,25,Norway,RB
+50,Charlie Cresswell,23,England,CB
+50,Mark McKenzie,27,USA,CB
+50,Djibril Sidibe,33,France,RB
+50,Rasmus Nicolaisen,28,Denmark,CB
+50,Gaetan Bakhouche,21,France,CB
+50,Seny Koumbassa,18,France,CB
+50,Guillaume Restes,21,France,GK
+50,Kjetil Haug,27,Norway,GK
+50,Alex Dominguez,27,Spain,GK
+51,Lassine Sinayoko,26,Mali,ST
+51,Danny Namaso,25,Cameroon,ST
+51,Sekou Mara,23,France,ST
+51,Ryan Rodin,20,France,ST
+51,Josue Casimir,24,Haiti,RW
+51,Oussama El Azzouzi,24,Morocco,CM
+51,Elisha Owusu,28,Ghana,CM
+51,Romain Faivre,27,France,AM
+51,Kevin Danois,21,France,CM
+51,Naouirou Ahamada,23,France,CM
+51,Lasso Coulibaly,23,Ivory Coast,RM
+51,Assane Diousse,28,Senegal,CM
+51,Nathan Buayi-Kiala,22,France,CM
+51,Tidiane Devernois,18,France,CM
+51,Gideon Mensah,27,Ghana,LB
+51,Francisco Sierralta,28,Chile,CB
+51,Clement Akpa,24,Ivory Coast,CB
+51,Sinaly Diomande,24,Ivory Coast,CB
+51,Lamine Sy,23,France,RB
+51,Bryan Okoh,22,Switzerland,CB
+51,Marvin Senaya,25,France,RB
+51,Fredrik Oppegard,23,Norway,LB
+51,Elikya Legros,17,France,CB
+51,Telli Siwe,21,France,CB
+51,Alvin Petit Dol,19,France,CB
+51,Donovan Leon,33,French Guiana,GK
+51,Theo De Percin,25,France,GK
+51,Tom Negrel,22,France,GK
+51,Louis Mezerette,19,France,GK
+52,Yassir Zabiri,21,Morocco,ST
+52,Mousa Tamari,28,Jordan,RW
+52,Breel Embolo,29,Switzerland,ST
+52,Esteban Lepaul,25,France,ST
+52,Ludovic Blas,28,France,RW
+52,Elias Legendre Quinonez,17,Ecuador,ST
+52,Arnaud Nordin,27,France,RW
+52,Nordan Mukiele,20,France,ST
+52,Sebastian Szymanski,26,Poland,AM
+52,Przemyslaw Frankowski,30,Poland,RM
+52,Djaoui Cisse,22,France,CM
+52,Quentin Merlin,23,France,LM
+52,Valentin Rongier,31,France,DM
+52,Mahdi Camara,27,France,CM
+52,Glen Kamara,30,Finland,CM
+52,Jeremy Jacquet,20,France,CB
+52,Abdelhamid Ait Boudlal,19,Morocco,CB
+52,Alidu Seidu,25,Ghana,CB
+52,Mahamadou Nagida,20,Cameroon,LB
+52,Anthony Rouault,24,France,CB
+52,Lilian Brassier,26,France,CB
+52,Brice Samba,31,France,GK
+52,Mathys Silistrie,20,France,GK
+53,Mostafa Mohamed,28,Egypt,ST
+53,Youssef El Arabi,39,Morocco,ST
+53,Bahereba Guirassy,19,France,LW
+53,Matthis Abline,22,France,ST
+53,Amady Camara,20,Mali,ST
+53,Ignatius Ganago,27,Cameroon,ST
+53,Ibrahima Sissoko,28,Mali,CM
+53,Remy Cabella,36,France,AM
+53,Deiver Machado,32,Colombia,LM
+53,Johann Lepenant,23,France,CM
+53,Mohamed Kaba,24,France,CM
+53,Francis Coquelin,34,France,CM
+53,Louis Leroux,20,France,DM
+53,Dehmaine Tabibou,20,France,CM
+53,Bahmed Deuff,20,France,CM
+53,Ali Youssef,24,Libya,CB
+53,Chidozie Awaziem,29,Nigeria,CB
+53,Abakar Sylla,23,Ivory Coast,CB
+53,Tylel Tati,18,France,CB
+53,Uros Radakovic,31,Serbia,CB
+53,Frederic Guilbert,31,France,RB
+53,Kelvin Amian,28,France,RB
+53,Fabien Centonze,30,France,RB
+53,Nicolas Cozza,27,France,LB
+53,Sekou Doucoure,20,Mali,CB
+53,Anthony Lopes,35,Portugal,GK
+53,Patrik Carlgren,34,Sweden,GK
+53,Alexis Mirbach,21,France,GK
+54,Goduine Koyalipou,26,Central African Republic,ST
+54,Djibirin Harouna,19,Cameroon,ST
+54,Prosper Peter,18,France,ST
+54,Lanroy Machine,20,France,ST
+54,Haris Belkebla,32,Algeria,CM
+54,Yassin Belkhdim,24,Morocco,CM
+54,Branco van den Boomen,30,Netherlands,CM
+54,Amine Sbai,25,Morocco,LW
+54,Louis Mouton,23,France,CM
+54,Pierrick Capelle,38,France,CM
+54,Carlens Arcus,29,Haiti,RB
+54,Ousmane Camara,23,Mali,CB
+54,Jacques Ekomie,22,Gabon,LB
+54,Lilian Raolisoa,25,France,RB
+54,Dan Sinaté,19,Mali,CB
+54,Jordan Lefort,32,France,CB
+54,Abdoulaye Bamba,35,Ivory Coast,CB
+54,Marius Courcoul,19,France,DM
+54,Emmanuel Biumla,20,France,CB
+54,Florent Hanin,36,France,LB
+54,Marius Louer,19,France,CB
+54,Herve Koffi,29,Burkina Faso,GK
+54,Oumar Pona,19,France,GK
+54,Melvin Zinga,23,Congo,GK
+55,Mbwana Ally Samatta,33,Tanzania,ST
+55,Sofiane Boufal,32,Morocco,LW
+55,Issa Soumare,25,Senegal,LW
+55,Felix Mambimbi,25,Switzerland,ST
+55,Godson Kyeremeh,25,France,RW
+55,Kenny Quetant,19,France,ST
+55,Noam Obougou Jacquet,20,France,ST
+55,Abdoulaye Toure,32,Guinea,CM
+55,Yassine Kechta,24,Morocco,CM
+55,Rassoul Ndiaye,24,Senegal,CM
+55,Fode Doucoure,25,Mali,RM
+55,Lucas Gourna-Douath,22,France,CM
+55,Reda Khadra,24,Germany,ST
+55,Simon Ebonog,21,France,CM
+55,Daren Nbenbegbe Mosengo,19,France,CM
+55,Guy-Noel Zohouri,19,Ivory Coast,CM
+55,Loic Nego,35,Hungary,RB
+55,Arouna Sangante,23,Senegal,CB
+55,Ayumu Seko,25,Japan,CB
+55,Timothee Pembele,23,France,RB
+55,Yanis Zouaoui,27,France,LB
+55,Etienne Youté Kinkoue,24,France,CB
+55,Gautier Lloris,30,France,CB
+55,Stephan Zagadou,17,France,CB
+55,Lionel Mpasi,31,DR Congo,GK
+55,Mory Diaw,32,Senegal,GK
+55,Paul Argney,19,France,GK
+55,Alex Teixeira,19,France,GK
+56,Mohamed Daramy,24,Denmark,LW
+56,Adama Bojang,21,Gambia,ST
+56,Hafiz Umar Ibrahim,20,Nigeria,ST
+56,Ikechukwu Orazi,18,Ireland,ST
+56,Keito Nakamura,25,Japan,LW
+56,Zabi,19,Ivory Coast,CM
+56,Yassine Benhattab,23,France,RW
+56,Ange Tia,19,Mali,AM
+56,Theo Leoni,25,Belgium,CM
+56,Mory Gbane,25,Ivory Coast,CM
+56,Yaya Fofana,21,Ivory Coast,CM
+56,John Patrick,22,Ireland,CM
+56,Thiemoko Diarra,22,Mali,RW
+56,Samuel Kotto,22,Cameroon,CB
+56,Hiroki Sekine,23,Japan,RB
+56,Joseph Okumu,28,Kenya,CB
+56,Abdoul Kone,20,France,CB
+56,Sergio Akieme,28,Spain,LB
+56,Nicolas Pallois,38,France,CB
+56,NTamon Elie Ahouanon,21,Ivory Coast,CB
+56,Maxime Busi,26,Belgium,RB
+56,Soumaila Sylla,22,Guinea,GK
+56,Ewen Jaouen,20,France,GK
+56,Alexandre Olliero,30,France,GK
+57,Zuriko Davitashvili,25,Georgia,LW
+57,Lucas Stassin,21,Belgium,ST
+57,Marten-Chris Paalberg,17,Estonia,ST
+57,Augustine Boakye,25,Ghana,RW
+57,Irvin Cardona,28,Malta,RW
+57,Djylian NGuessan,17,France,ST
+57,Aimen Moueffek,24,Morocco,CM
+57,Igor Miladinovic,22,Serbia,AM
+57,Abdoulaye Kante,20,France,CM
+57,Joshua Duffus,20,Jamaica,ST
+57,Benjamin Old,23,New Zealand,LM
+57,Mahmoud Jaber,26,Israel,CM
+57,Florian Tardieu,33,France,CM
+57,Paul Eymard,18,France,CM
+57,Nadir El Jamali,18,France,RW
+57,Luan Gadegbeku,19,France,CM
+57,Ebenezer Annan,23,Ghana,LB
+57,Maxime Bernauer,27,France,CB
+57,Strahinja Stojkovic,19,Serbia,RB
+57,Chico Lamba,23,Portugal,CB
+57,Joao Ferreira,24,Portugal,RB
+57,Aboubaka Soumahoro,21,France,CB
+57,Julien Le Cardinal,28,France,CB
+57,Mickael Nade,27,France,CB
+57,Dennis Appiah,33,France,RB
+57,Lassana Traore,18,Senegal,LB
+57,Kevin Pedro,20,France,RB
+57,Gautier Larsonneur,29,France,GK
+57,Brice Maubleu,36,France,GK
+58,Enzo Molebe,18,France,RW
+58,Alexandre Mendy,31,Guinea-Bissau,ST
+58,Axel Gueguin,20,France,ST
+58,Nathanael Mbuku,23,DR Congo,RW
+58,Teji Savanier,34,France,AM
+58,Khalil Fayad,21,France,CM
+58,Ayanda Sishuba,21,Belgium,AM
+58,Yanis Issoufou,19,France,LW
+58,Nabil Homsaa,23,France,CM
+58,Nicolas Pays,22,France,RW
+58,Theo Chennahi,21,France,CM
+58,Everson Junior,22,France,CM
+58,Naoufel El Hannach,19,Morocco,RB
+58,Enzo Tchato Mbiayi,23,Cameroon,RB
+58,Christopher Jullien,32,Guadeloupe,CB
+58,Lucas Mincarelli Davin,22,France,LB
+58,Yael Mouanga,20,France,CB
+58,Julien Laporte,32,France,CB
+58,Wilfried Ndollo Bille,20,Cameroon,CB
+58,Theo Sainte Luce,27,France,LB
+58,Simon Ngapandouetnbu,22,Cameroon,GK
+58,Viktor Dzodic,19,Serbia,GK
+58,Mathieu Michel,34,France,GK
+58,Kevin Kamdem Kamgaing,20,Cameroon,GK
+
+
