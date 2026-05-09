@@ -418,76 +418,6 @@ class MatchStats:
         """, {"match_id": self.match_id})
 
 
-class PlayerMatchStats:
-    def __init__(self, player_id, match_id, minutes_played, goals, assists, yellow_cards, red_cards, rating):
-        self.player_id = player_id
-        self.match_id = match_id
-        self.minutes_played = minutes_played
-        self.goals = goals
-        self.assists = assists
-        self.yellow_cards = yellow_cards
-        self.red_cards = red_cards
-        self.rating = rating
-
-    @staticmethod
-    def poisci_vse(conn):
-        cur = conn.execute("""
-            SELECT player_id, match_id, minutes_played, goals, assists,
-                   yellow_cards, red_cards, rating
-            FROM player_match_stats
-            ORDER BY player_id, match_id;
-        """)
-        for row in cur:
-            yield PlayerMatchStats(*row)
-
-    @staticmethod
-    def poisci_po_id(conn, player_id, match_id):
-        cur = conn.execute("""
-            SELECT player_id, match_id, minutes_played, goals, assists,
-                   yellow_cards, red_cards, rating
-            FROM player_match_stats
-            WHERE player_id = :player_id AND match_id = :match_id;
-        """, {"player_id": player_id, "match_id": match_id})
-        row = cur.fetchone()
-        if row is None:
-            return None
-        return PlayerMatchStats(*row)
-
-    def vstavi(self, conn):
-        conn.execute("""
-            INSERT INTO player_match_stats (
-                player_id, match_id, minutes_played, goals, assists,
-                yellow_cards, red_cards, rating
-            )
-            VALUES (
-                :player_id, :match_id, :minutes_played, :goals, :assists,
-                :yellow_cards, :red_cards, :rating
-            );
-        """, self.__dict__)
-        return (self.player_id, self.match_id)
-
-    def posodobi(self, conn):
-        conn.execute("""
-            UPDATE player_match_stats
-            SET minutes_played = :minutes_played,
-                goals = :goals,
-                assists = :assists,
-                yellow_cards = :yellow_cards,
-                red_cards = :red_cards,
-                rating = :rating
-            WHERE player_id = :player_id AND match_id = :match_id;
-        """, self.__dict__)
-
-    def izbrisi(self, conn):
-        conn.execute("""
-            DELETE FROM player_match_stats
-            WHERE player_id = :player_id AND match_id = :match_id;
-        """, {
-            "player_id": self.player_id,
-            "match_id": self.match_id,
-        })
-
-
 class LeagueTabela(Tabela):
     ime = "league"
     podatki = "league.csv"
@@ -583,24 +513,22 @@ class MatchStatsTabela(Tabela):
         """)
 
 
-class PlayerMatchStatsTabela(Tabela):
-    ime = "player_match_stats"
-    podatki = "player_match_stats.csv"
+class PlayerSeasonStatsTabela(Tabela):
+    ime = "player_season_stats"
+    podatki = "player_season_stats.csv"
 
     def ustvari(self):
         self.conn.execute("""
-            CREATE TABLE player_match_stats (
-                player_id      INTEGER NOT NULL,
-                match_id       INTEGER NOT NULL,
+            CREATE TABLE player_season_stats (
+                player_id      INTEGER PRIMARY KEY,
+                matches_played INTEGER DEFAULT 0,
+                starts         INTEGER DEFAULT 0,
                 minutes_played INTEGER DEFAULT 0,
                 goals          INTEGER DEFAULT 0,
                 assists        INTEGER DEFAULT 0,
                 yellow_cards   INTEGER DEFAULT 0,
                 red_cards      INTEGER DEFAULT 0,
-                rating         REAL,
-                PRIMARY KEY (player_id, match_id),
-                FOREIGN KEY (player_id) REFERENCES player(player_id) ON DELETE CASCADE,
-                FOREIGN KEY (match_id) REFERENCES match(match_id) ON DELETE CASCADE
+                FOREIGN KEY (player_id) REFERENCES player(player_id) ON DELETE CASCADE
             );
         """)
 
@@ -612,7 +540,7 @@ def pripravi_tabele(conn):
         PlayerTabela(conn),
         MatchTabela(conn),
         MatchStatsTabela(conn),
-        PlayerMatchStatsTabela(conn),
+        PlayerSeasonStatsTabela(conn),
     ]
 
 

@@ -4,11 +4,42 @@ from flask import Flask, render_template, abort, request
 app = Flask(__name__)
 DB_PATH = "nogomet.db"
 
+LEAGUE_FLAG_CLASSES = {
+    "Premier League": "england",
+    "La Liga": "spain",
+    "Ligue 1": "france",
+    "Bundesliga": "germany",
+    "Serie A": "italy",
+}
+
+
+def ensure_player_season_stats(conn):
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS player_season_stats (
+            player_id      INTEGER PRIMARY KEY,
+            matches_played INTEGER DEFAULT 0,
+            starts         INTEGER DEFAULT 0,
+            minutes_played INTEGER DEFAULT 0,
+            goals          INTEGER DEFAULT 0,
+            assists        INTEGER DEFAULT 0,
+            yellow_cards   INTEGER DEFAULT 0,
+            red_cards      INTEGER DEFAULT 0,
+            FOREIGN KEY (player_id) REFERENCES player(player_id) ON DELETE CASCADE
+        );
+    """)
+    conn.commit()
+
+
+@app.template_global()
+def league_flag_class(league_name):
+    return LEAGUE_FLAG_CLASSES.get(league_name, "generic")
+
 
 def get_conn():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON;")
+    ensure_player_season_stats(conn)
     return conn
 
 
@@ -30,23 +61,34 @@ def index():
         ORDER BY l.name;
     """).fetchall()
 
-    zadnje_tekme = conn.execute("""
+    primerjava_lig = conn.execute("""
         SELECT
-            m.match_id,
-            l.name AS league_name,
-            th.name AS home_team,
-            ta.name AS away_team,
-            m.match_date,
-            m.round_number,
-            ms.home_goals,
-            ms.away_goals
-        FROM match m
-        JOIN league l ON m.league_id = l.league_id
-        JOIN team th ON m.home_team_id = th.team_id
-        JOIN team ta ON m.away_team_id = ta.team_id
-        LEFT JOIN match_stats ms ON m.match_id = ms.match_id
-        ORDER BY m.match_date DESC, m.match_id DESC
-        LIMIT 8;
+            l.league_id,
+            l.name,
+            COALESCE(tc.teams_count, 0) AS teams_count,
+            COALESCE(mc.matches_count, 0) AS matches_count,
+            COALESCE(mc.total_goals, 0) AS total_goals,
+            ROUND(
+                1.0 * COALESCE(mc.total_goals, 0)
+                / NULLIF(COALESCE(mc.matches_count, 0), 0),
+                2
+            ) AS goals_per_match
+        FROM league l
+        LEFT JOIN (
+            SELECT league_id, COUNT(*) AS teams_count
+            FROM team
+            GROUP BY league_id
+        ) tc ON l.league_id = tc.league_id
+        LEFT JOIN (
+            SELECT
+                m.league_id,
+                COUNT(*) AS matches_count,
+                SUM(ms.home_goals + ms.away_goals) AS total_goals
+            FROM match m
+            JOIN match_stats ms ON m.match_id = ms.match_id
+            GROUP BY m.league_id
+        ) mc ON l.league_id = mc.league_id
+        ORDER BY goals_per_match DESC, total_goals DESC;
     """).fetchall()
 
     top_strelci = conn.execute("""
@@ -57,14 +99,13 @@ def index():
             t.name AS team_name,
             l.league_id,
             l.name AS league_name,
-            COALESCE(SUM(pms.goals), 0) AS goals
+            COALESCE(pss.goals, 0) AS goals
         FROM player p
         JOIN team t ON p.team_id = t.team_id
         JOIN league l ON t.league_id = l.league_id
-        LEFT JOIN player_match_stats pms ON p.player_id = pms.player_id
-        GROUP BY p.player_id, p.name, t.team_id, t.name, l.league_id, l.name
+        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
         ORDER BY goals DESC, p.name ASC
-        LIMIT 10;
+        LIMIT 25;
     """).fetchall()
 
     top_asistenti = conn.execute("""
@@ -75,14 +116,13 @@ def index():
             t.name AS team_name,
             l.league_id,
             l.name AS league_name,
-            COALESCE(SUM(pms.assists), 0) AS assists
+            COALESCE(pss.assists, 0) AS assists
         FROM player p
         JOIN team t ON p.team_id = t.team_id
         JOIN league l ON t.league_id = l.league_id
-        LEFT JOIN player_match_stats pms ON p.player_id = pms.player_id
-        GROUP BY p.player_id, p.name, t.team_id, t.name, l.league_id, l.name
+        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
         ORDER BY assists DESC, p.name ASC
-        LIMIT 10;
+        LIMIT 20;
     """).fetchall()
 
     conn.close()
@@ -90,7 +130,7 @@ def index():
     return render_template(
         "index.html",
         lige=lige,
-        zadnje_tekme=zadnje_tekme,
+        primerjava_lig=primerjava_lig,
         top_strelci=top_strelci,
         top_asistenti=top_asistenti
     )
@@ -101,6 +141,8 @@ def all_matches():
     conn = get_conn()
 
     league_id = request.args.get("league_id", "").strip()
+    team_id = request.args.get("team_id", "").strip()
+    q = request.args.get("q", "").strip()
 
     lige = conn.execute("""
         SELECT league_id, name, season
@@ -108,51 +150,58 @@ def all_matches():
         ORDER BY name;
     """).fetchall()
 
+    ekipe = conn.execute("""
+        SELECT
+            t.team_id,
+            t.name,
+            l.name AS league_name
+        FROM team t
+        JOIN league l ON t.league_id = l.league_id
+        ORDER BY l.name, t.name;
+    """).fetchall()
+
+    where = []
+    params = []
+
     if league_id.isdigit():
-        tekme = conn.execute("""
-            SELECT
-                m.match_id,
-                l.league_id,
-                l.name AS league_name,
-                l.season,
-                th.team_id AS home_team_id,
-                th.name AS home_team,
-                ta.team_id AS away_team_id,
-                ta.name AS away_team,
-                m.match_date,
-                m.round_number,
-                ms.home_goals,
-                ms.away_goals
-            FROM match m
-            JOIN league l ON m.league_id = l.league_id
-            JOIN team th ON m.home_team_id = th.team_id
-            JOIN team ta ON m.away_team_id = ta.team_id
-            LEFT JOIN match_stats ms ON m.match_id = ms.match_id
-            WHERE l.league_id = ?
-            ORDER BY m.match_date DESC, m.match_id DESC;
-        """, (int(league_id),)).fetchall()
-    else:
-        tekme = conn.execute("""
-            SELECT
-                m.match_id,
-                l.league_id,
-                l.name AS league_name,
-                l.season,
-                th.team_id AS home_team_id,
-                th.name AS home_team,
-                ta.team_id AS away_team_id,
-                ta.name AS away_team,
-                m.match_date,
-                m.round_number,
-                ms.home_goals,
-                ms.away_goals
-            FROM match m
-            JOIN league l ON m.league_id = l.league_id
-            JOIN team th ON m.home_team_id = th.team_id
-            JOIN team ta ON m.away_team_id = ta.team_id
-            LEFT JOIN match_stats ms ON m.match_id = ms.match_id
-            ORDER BY m.match_date DESC, m.match_id DESC;
-        """).fetchall()
+        where.append("l.league_id = ?")
+        params.append(int(league_id))
+
+    if team_id.isdigit():
+        where.append("(th.team_id = ? OR ta.team_id = ?)")
+        params.extend([int(team_id), int(team_id)])
+
+    if q:
+        where.append("(th.name LIKE ? OR ta.name LIKE ? OR l.name LIKE ?)")
+        search = f"%{q}%"
+        params.extend([search, search, search])
+
+    where_sql = ""
+    if where:
+        where_sql = "WHERE " + " AND ".join(where)
+
+    tekme = conn.execute(f"""
+        SELECT
+            m.match_id,
+            l.league_id,
+            l.name AS league_name,
+            l.season,
+            th.team_id AS home_team_id,
+            th.name AS home_team,
+            ta.team_id AS away_team_id,
+            ta.name AS away_team,
+            m.match_date,
+            m.round_number,
+            ms.home_goals,
+            ms.away_goals
+        FROM match m
+        JOIN league l ON m.league_id = l.league_id
+        JOIN team th ON m.home_team_id = th.team_id
+        JOIN team ta ON m.away_team_id = ta.team_id
+        LEFT JOIN match_stats ms ON m.match_id = ms.match_id
+        {where_sql}
+        ORDER BY m.match_date DESC, m.match_id DESC;
+    """, params).fetchall()
 
     conn.close()
 
@@ -160,7 +209,10 @@ def all_matches():
         "all_matches.html",
         tekme=tekme,
         lige=lige,
-        selected_league_id=league_id
+        ekipe=ekipe,
+        selected_league_id=league_id,
+        selected_team_id=team_id,
+        q=q
     )
 
 
@@ -186,20 +238,15 @@ def top_scorers():
                 t.name AS team_name,
                 l.league_id,
                 l.name AS league_name,
-                COALESCE(COUNT(pms.match_id), 0) AS matches_played,
-                COALESCE(SUM(pms.goals), 0) AS goals,
-                COALESCE(SUM(pms.assists), 0) AS assists,
-                COALESCE(AVG(pms.rating), 0) AS avg_rating
+                COALESCE(pss.matches_played, 0) AS matches_played,
+                COALESCE(pss.goals, 0) AS goals,
+                COALESCE(pss.assists, 0) AS assists
             FROM player p
             JOIN team t ON p.team_id = t.team_id
             JOIN league l ON t.league_id = l.league_id
-            LEFT JOIN player_match_stats pms ON p.player_id = pms.player_id
+            LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
             WHERE l.league_id = ?
-            GROUP BY
-                p.player_id, p.name, p.position,
-                t.team_id, t.name,
-                l.league_id, l.name
-            ORDER BY goals DESC, assists DESC, avg_rating DESC, p.name ASC;
+            ORDER BY goals DESC, assists DESC, p.name ASC;
         """, (int(league_id),)).fetchall()
     else:
         strelci = conn.execute("""
@@ -211,19 +258,14 @@ def top_scorers():
                 t.name AS team_name,
                 l.league_id,
                 l.name AS league_name,
-                COALESCE(COUNT(pms.match_id), 0) AS matches_played,
-                COALESCE(SUM(pms.goals), 0) AS goals,
-                COALESCE(SUM(pms.assists), 0) AS assists,
-                COALESCE(AVG(pms.rating), 0) AS avg_rating
+                COALESCE(pss.matches_played, 0) AS matches_played,
+                COALESCE(pss.goals, 0) AS goals,
+                COALESCE(pss.assists, 0) AS assists
             FROM player p
             JOIN team t ON p.team_id = t.team_id
             JOIN league l ON t.league_id = l.league_id
-            LEFT JOIN player_match_stats pms ON p.player_id = pms.player_id
-            GROUP BY
-                p.player_id, p.name, p.position,
-                t.team_id, t.name,
-                l.league_id, l.name
-            ORDER BY goals DESC, assists DESC, avg_rating DESC, p.name ASC;
+            LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
+            ORDER BY goals DESC, assists DESC, p.name ASC;
         """).fetchall()
 
     conn.close()
@@ -258,20 +300,15 @@ def top_assists():
                 t.name AS team_name,
                 l.league_id,
                 l.name AS league_name,
-                COALESCE(COUNT(pms.match_id), 0) AS matches_played,
-                COALESCE(SUM(pms.goals), 0) AS goals,
-                COALESCE(SUM(pms.assists), 0) AS assists,
-                COALESCE(AVG(pms.rating), 0) AS avg_rating
+                COALESCE(pss.matches_played, 0) AS matches_played,
+                COALESCE(pss.goals, 0) AS goals,
+                COALESCE(pss.assists, 0) AS assists
             FROM player p
             JOIN team t ON p.team_id = t.team_id
             JOIN league l ON t.league_id = l.league_id
-            LEFT JOIN player_match_stats pms ON p.player_id = pms.player_id
+            LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
             WHERE l.league_id = ?
-            GROUP BY
-                p.player_id, p.name, p.position,
-                t.team_id, t.name,
-                l.league_id, l.name
-            ORDER BY assists DESC, goals DESC, avg_rating DESC, p.name ASC;
+            ORDER BY assists DESC, goals DESC, p.name ASC;
         """, (int(league_id),)).fetchall()
     else:
         asistenti = conn.execute("""
@@ -283,19 +320,14 @@ def top_assists():
                 t.name AS team_name,
                 l.league_id,
                 l.name AS league_name,
-                COALESCE(COUNT(pms.match_id), 0) AS matches_played,
-                COALESCE(SUM(pms.goals), 0) AS goals,
-                COALESCE(SUM(pms.assists), 0) AS assists,
-                COALESCE(AVG(pms.rating), 0) AS avg_rating
+                COALESCE(pss.matches_played, 0) AS matches_played,
+                COALESCE(pss.goals, 0) AS goals,
+                COALESCE(pss.assists, 0) AS assists
             FROM player p
             JOIN team t ON p.team_id = t.team_id
             JOIN league l ON t.league_id = l.league_id
-            LEFT JOIN player_match_stats pms ON p.player_id = pms.player_id
-            GROUP BY
-                p.player_id, p.name, p.position,
-                t.team_id, t.name,
-                l.league_id, l.name
-            ORDER BY assists DESC, goals DESC, avg_rating DESC, p.name ASC;
+            LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
+            ORDER BY assists DESC, goals DESC, p.name ASC;
         """).fetchall()
 
     conn.close()
@@ -490,12 +522,11 @@ def league_detail(league_id):
             p.name AS player_name,
             t.team_id,
             t.name AS team_name,
-            COALESCE(SUM(pms.goals), 0) AS goals
+            COALESCE(pss.goals, 0) AS goals
         FROM player p
         JOIN team t ON p.team_id = t.team_id
-        LEFT JOIN player_match_stats pms ON p.player_id = pms.player_id
+        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
         WHERE t.league_id = ?
-        GROUP BY p.player_id, p.name, t.team_id, t.name
         ORDER BY goals DESC, p.name ASC
         LIMIT 5;
     """, (league_id,)).fetchall()
@@ -506,12 +537,11 @@ def league_detail(league_id):
             p.name AS player_name,
             t.team_id,
             t.name AS team_name,
-            COALESCE(SUM(pms.assists), 0) AS assists
+            COALESCE(pss.assists, 0) AS assists
         FROM player p
         JOIN team t ON p.team_id = t.team_id
-        LEFT JOIN player_match_stats pms ON p.player_id = pms.player_id
+        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
         WHERE t.league_id = ?
-        GROUP BY p.player_id, p.name, t.team_id, t.name
         ORDER BY assists DESC, p.name ASC
         LIMIT 5;
     """, (league_id,)).fetchall()
@@ -555,10 +585,19 @@ def team_detail(team_id):
         abort(404)
 
     igralci = conn.execute("""
-        SELECT player_id, name, age, nationality, position
-        FROM player
-        WHERE team_id = ?
-        ORDER BY name;
+        SELECT
+            p.player_id,
+            p.name,
+            p.age,
+            p.nationality,
+            p.position,
+            COALESCE(pss.matches_played, 0) AS matches_played,
+            COALESCE(pss.goals, 0) AS goals,
+            COALESCE(pss.assists, 0) AS assists
+        FROM player p
+        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
+        WHERE p.team_id = ?
+        ORDER BY p.name;
     """, (team_id,)).fetchall()
 
     tekme = conn.execute("""
@@ -649,11 +688,10 @@ def team_detail(team_id):
         SELECT
             p.player_id,
             p.name AS player_name,
-            COALESCE(SUM(pms.goals), 0) AS goals
+            COALESCE(pss.goals, 0) AS goals
         FROM player p
-        LEFT JOIN player_match_stats pms ON p.player_id = pms.player_id
+        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
         WHERE p.team_id = ?
-        GROUP BY p.player_id, p.name
         ORDER BY goals DESC, p.name ASC
         LIMIT 1;
     """, (team_id,)).fetchone()
@@ -662,11 +700,10 @@ def team_detail(team_id):
         SELECT
             p.player_id,
             p.name AS player_name,
-            COALESCE(SUM(pms.assists), 0) AS assists
+            COALESCE(pss.assists, 0) AS assists
         FROM player p
-        LEFT JOIN player_match_stats pms ON p.player_id = pms.player_id
+        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
         WHERE p.team_id = ?
-        GROUP BY p.player_id, p.name
         ORDER BY assists DESC, p.name ASC
         LIMIT 1;
     """, (team_id,)).fetchone()
@@ -744,36 +781,36 @@ def match_detail(match_id):
             p.player_id,
             p.name AS player_name,
             p.position,
-            COALESCE(pms.minutes_played, 0) AS minutes_played,
-            COALESCE(pms.goals, 0) AS goals,
-            COALESCE(pms.assists, 0) AS assists,
-            COALESCE(pms.yellow_cards, 0) AS yellow_cards,
-            COALESCE(pms.red_cards, 0) AS red_cards,
-            pms.rating
+            COALESCE(pss.matches_played, 0) AS matches_played,
+            COALESCE(pss.starts, 0) AS starts,
+            COALESCE(pss.minutes_played, 0) AS minutes_played,
+            COALESCE(pss.goals, 0) AS goals,
+            COALESCE(pss.assists, 0) AS assists,
+            COALESCE(pss.yellow_cards, 0) AS yellow_cards,
+            COALESCE(pss.red_cards, 0) AS red_cards
         FROM player p
-        LEFT JOIN player_match_stats pms
-            ON p.player_id = pms.player_id AND pms.match_id = ?
+        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
         WHERE p.team_id = ?
         ORDER BY p.name;
-    """, (match_id, tekma["home_team_id"])).fetchall()
+    """, (tekma["home_team_id"],)).fetchall()
 
     away_players = conn.execute("""
         SELECT
             p.player_id,
             p.name AS player_name,
             p.position,
-            COALESCE(pms.minutes_played, 0) AS minutes_played,
-            COALESCE(pms.goals, 0) AS goals,
-            COALESCE(pms.assists, 0) AS assists,
-            COALESCE(pms.yellow_cards, 0) AS yellow_cards,
-            COALESCE(pms.red_cards, 0) AS red_cards,
-            pms.rating
+            COALESCE(pss.matches_played, 0) AS matches_played,
+            COALESCE(pss.starts, 0) AS starts,
+            COALESCE(pss.minutes_played, 0) AS minutes_played,
+            COALESCE(pss.goals, 0) AS goals,
+            COALESCE(pss.assists, 0) AS assists,
+            COALESCE(pss.yellow_cards, 0) AS yellow_cards,
+            COALESCE(pss.red_cards, 0) AS red_cards
         FROM player p
-        LEFT JOIN player_match_stats pms
-            ON p.player_id = pms.player_id AND pms.match_id = ?
+        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
         WHERE p.team_id = ?
         ORDER BY p.name;
-    """, (match_id, tekma["away_team_id"])).fetchall()
+    """, (tekma["away_team_id"],)).fetchall()
 
     conn.close()
 
@@ -813,15 +850,27 @@ def player_detail(player_id):
 
     statistika = conn.execute("""
         SELECT
-            COUNT(*) AS matches_played,
-            COALESCE(SUM(goals), 0) AS total_goals,
-            COALESCE(SUM(assists), 0) AS total_assists,
-            COALESCE(SUM(yellow_cards), 0) AS total_yellow,
-            COALESCE(SUM(red_cards), 0) AS total_red,
-            COALESCE(AVG(rating), 0) AS avg_rating
-        FROM player_match_stats
+            COALESCE(matches_played, 0) AS matches_played,
+            COALESCE(starts, 0) AS starts,
+            COALESCE(minutes_played, 0) AS minutes_played,
+            COALESCE(goals, 0) AS total_goals,
+            COALESCE(assists, 0) AS total_assists,
+            COALESCE(yellow_cards, 0) AS total_yellow,
+            COALESCE(red_cards, 0) AS total_red
+        FROM player_season_stats
         WHERE player_id = ?;
     """, (player_id,)).fetchone()
+
+    if statistika is None:
+        statistika = {
+            "matches_played": 0,
+            "starts": 0,
+            "minutes_played": 0,
+            "total_goals": 0,
+            "total_assists": 0,
+            "total_yellow": 0,
+            "total_red": 0,
+        }
 
     conn.close()
 

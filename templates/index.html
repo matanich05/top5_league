@@ -1,59 +1,53 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 
 {% block title %}Domov - Top 5 Leagues{% endblock %}
 
 {% block content %}
-<div class="hero">
-    <div class="hero-box">
-        <h2 class="hero-title">Nogometni portal za top 5 evropskih lig</h2>
-        <p class="hero-text">
-            Ta projekt prikazuje lige, ekipe, igralce, tekme, rezultate, lestvico, top strelce in top asistente.
-            Narejen je kot poenostavljena verzija FlashScore oziroma SofaScore za eno sezono.
-        </p>
-        <div class="league-meta">
-            <span class="small-badge">Premier League</span>
-            <span class="small-badge">La Liga</span>
-            <span class="small-badge">Ligue 1</span>
-            <span class="small-badge">Bundesliga</span>
-            <span class="small-badge">Serie A</span>
-        </div>
+<div class="hero-box">
+    <h2 class="hero-title">Nogometni portal za top 5 evropskih lig</h2>
+    <p class="hero-text">
+        Ta projekt prikazuje lige, ekipe, igralce, tekme, rezultate, lestvico, top strelce in top asistente za sezono 2024/2025.
+    </p>
+    <div class="league-meta">
+        <span class="small-badge"><span class="flag flag-england"></span>Premier League</span>
+        <span class="small-badge"><span class="flag flag-spain"></span>La Liga</span>
+        <span class="small-badge"><span class="flag flag-france"></span>Ligue 1</span>
+        <span class="small-badge"><span class="flag flag-germany"></span>Bundesliga</span>
+        <span class="small-badge"><span class="flag flag-italy"></span>Serie A</span>
     </div>
+</div>
 
-    <div class="hero-box">
-        <h3>Zadnje vnešene tekme</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Liga</th>
-                    <th>Tekma</th>
-                    <th>Rezultat</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for tekma in zadnje_tekme %}
-                <tr>
-                    <td>{{ tekma['league_name'] }}</td>
-                    <td>
-                        <a href="/match/{{ tekma['match_id'] }}">
-                            {{ tekma['home_team'] }} - {{ tekma['away_team'] }}
-                        </a>
-                    </td>
-                    <td>
-                        {% if tekma['home_goals'] is not none and tekma['away_goals'] is not none %}
-                            {{ tekma['home_goals'] }} : {{ tekma['away_goals'] }}
-                        {% else %}
-                            -
-                        {% endif %}
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="3">Ni tekem.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<div class="card">
+    <h2>Primerjava lig</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Liga</th>
+                <th>Ekipe</th>
+                <th>Tekme</th>
+                <th>Goli</th>
+                <th>Goli na tekmo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for liga in primerjava_lig %}
+            <tr>
+                <td>
+                    <span class="flag flag-{{ league_flag_class(liga['name']) }}"></span>
+                    <a href="/league/{{ liga['league_id'] }}">{{ liga['name'] }}</a>
+                </td>
+                <td>{{ liga['teams_count'] }}</td>
+                <td>{{ liga['matches_count'] }}</td>
+                <td>{{ liga['total_goals'] }}</td>
+                <td><strong>{{ "%.2f"|format(liga['goals_per_match'] or 0) }}</strong></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">Ni podatkov.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 <div class="grid">
@@ -67,6 +61,7 @@
             {% for liga in lige %}
             <div class="card">
                 <h3>
+                    <span class="flag flag-{{ league_flag_class(liga['name']) }}"></span>
                     <a href="/league/{{ liga['league_id'] }}">{{ liga['name'] }}</a>
                 </h3>
                 <p>Sezona: {{ liga['season'] }}</p>

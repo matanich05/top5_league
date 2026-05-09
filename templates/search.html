@@ -30,6 +30,7 @@
                 </td>
                 <td>{{ ekipa['city'] or '-' }}</td>
                 <td>
+                    <span class="flag flag-{{ league_flag_class(ekipa['league_name']) }}"></span>
                     <a href="/league/{{ ekipa['league_id'] }}">{{ ekipa['league_name'] }}</a>
                 </td>
             </tr>
@@ -64,6 +65,7 @@
                     <a href="/team/{{ igralec['team_id'] }}">{{ igralec['team_name'] }}</a>
                 </td>
                 <td>
+                    <span class="flag flag-{{ league_flag_class(igralec['league_name']) }}"></span>
                     <a href="/league/{{ igralec['league_id'] }}">{{ igralec['league_name'] }}</a>
                 </td>
             </tr>

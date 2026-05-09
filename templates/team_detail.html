@@ -5,7 +5,11 @@
 {% block content %}
 <div class="card">
     <h2>{{ ekipa['name'] }}</h2>
-    <p>Liga: <a href="/league/{{ ekipa['league_id'] }}">{{ ekipa['league_name'] }}</a></p>
+    <p>
+        Liga:
+        <span class="flag flag-{{ league_flag_class(ekipa['league_name']) }}"></span>
+        <a href="/league/{{ ekipa['league_id'] }}">{{ ekipa['league_name'] }}</a>
+    </p>
     <p>Sezona: {{ ekipa['season'] }}</p>
     <p>Mesto: {{ ekipa['city'] or '-' }}</p>
     <p>Stadion: {{ ekipa['stadium'] or '-' }}</p>
@@ -15,30 +19,33 @@
 <div class="grid">
     <div class="card">
         <h3>Statistika ekipe</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>OD</th>
-                    <th>Z</th>
-                    <th>R</th>
-                    <th>P</th>
-                    <th>Goli</th>
-                    <th>Točke</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ team_stats['played'] or 0 }}</td>
-                    <td>{{ team_stats['wins'] or 0 }}</td>
-                    <td>{{ team_stats['draws'] or 0 }}</td>
-                    <td>{{ team_stats['losses'] or 0 }}</td>
-                    <td>{{ team_stats['goals_for'] or 0 }} : {{ team_stats['goals_against'] or 0 }}</td>
-                    <td><strong>{{ team_stats['points'] or 0 }}</strong></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="stat-grid">
+            <div>
+                <span class="stat-label">Odigrane</span>
+                <strong>{{ team_stats['played'] or 0 }}</strong>
+            </div>
+            <div>
+                <span class="stat-label">Zmage</span>
+                <strong>{{ team_stats['wins'] or 0 }}</strong>
+            </div>
+            <div>
+                <span class="stat-label">Remiji</span>
+                <strong>{{ team_stats['draws'] or 0 }}</strong>
+            </div>
+            <div>
+                <span class="stat-label">Porazi</span>
+                <strong>{{ team_stats['losses'] or 0 }}</strong>
+            </div>
+            <div>
+                <span class="stat-label">Goli</span>
+                <strong>{{ team_stats['goals_for'] or 0 }} : {{ team_stats['goals_against'] or 0 }}</strong>
+            </div>
+            <div>
+                <span class="stat-label">Točke</span>
+                <strong>{{ team_stats['points'] or 0 }}</strong>
+            </div>
+        </div>
     </div>
-
     <div class="card">
         <h3>Forma ekipe</h3>
         <p>
@@ -92,6 +99,9 @@
                 <th>Starost</th>
                 <th>Narodnost</th>
                 <th>Pozicija</th>
+                <th>Tekme</th>
+                <th>Goli</th>
+                <th>Asistence</th>
             </tr>
         </thead>
         <tbody>
@@ -103,10 +113,13 @@
                 <td>{{ igralec['age'] or '-' }}</td>
                 <td>{{ igralec['nationality'] or '-' }}</td>
                 <td>{{ igralec['position'] or '-' }}</td>
+                <td>{{ igralec['matches_played'] }}</td>
+                <td>{{ igralec['goals'] }}</td>
+                <td>{{ igralec['assists'] }}</td>
             </tr>
             {% else %}
             <tr>
-                <td colspan="4">Ni igralcev.</td>
+                <td colspan="7">Ni igralcev.</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -11,17 +11,27 @@
 </div>
 
 <div class="card">
-    <h3>Filtriranje po ligi</h3>
+    <h3>Filtriranje tekem</h3>
     <form class="filter-form" method="get" action="/matches">
         <select name="league_id">
             <option value="">Vse lige</option>
             {% for liga in lige %}
             <option value="{{ liga['league_id'] }}" {% if selected_league_id == liga['league_id']|string %}selected{% endif %}>
-                {{ liga['name'] }} ({{ liga['season'] }})
+                {{ liga['name'] }}
             </option>
             {% endfor %}
         </select>
+        <select name="team_id">
+            <option value="">Vse ekipe</option>
+            {% for ekipa in ekipe %}
+            <option value="{{ ekipa['team_id'] }}" {% if selected_team_id == ekipa['team_id']|string %}selected{% endif %}>
+                {{ ekipa['league_name'] }} - {{ ekipa['name'] }}
+            </option>
+            {% endfor %}
+        </select>
+        <input type="text" name="q" value="{{ q }}" placeholder="Išči tekmo ali ligo">
         <button type="submit">Filtriraj</button>
+        <a href="/matches">Počisti</a>
     </form>
 </div>
 
@@ -42,6 +52,7 @@
             <tr>
                 <td>{{ tekma['match_date'] }}</td>
                 <td>
+                    <span class="flag flag-{{ league_flag_class(tekma['league_name']) }}"></span>
                     <a href="/league/{{ tekma['league_id'] }}">{{ tekma['league_name'] }}</a>
                 </td>
                 <td>{{ tekma['round_number'] or '-' }}</td>

@@ -17,7 +17,7 @@
             <option value="">Vse lige</option>
             {% for liga in lige %}
             <option value="{{ liga['league_id'] }}" {% if selected_league_id == liga['league_id']|string %}selected{% endif %}>
-                {{ liga['name'] }} ({{ liga['season'] }})
+                {{ liga['name'] }}
             </option>
             {% endfor %}
         </select>
@@ -37,7 +37,6 @@
                 <th>Tekme</th>
                 <th>Goli</th>
                 <th>Asistence</th>
-                <th>Povp. ocena</th>
             </tr>
         </thead>
         <tbody>
@@ -52,16 +51,16 @@
                     <a href="/team/{{ igralec['team_id'] }}">{{ igralec['team_name'] }}</a>
                 </td>
                 <td>
+                    <span class="flag flag-{{ league_flag_class(igralec['league_name']) }}"></span>
                     <a href="/league/{{ igralec['league_id'] }}">{{ igralec['league_name'] }}</a>
                 </td>
                 <td>{{ igralec['matches_played'] }}</td>
                 <td><strong>{{ igralec['goals'] }}</strong></td>
                 <td>{{ igralec['assists'] }}</td>
-                <td>{{ "%.2f"|format(igralec['avg_rating']) }}</td>
             </tr>
             {% else %}
             <tr>
-                <td colspan="9">Ni podatkov.</td>
+                <td colspan="8">Ni podatkov.</td>
             </tr>
             {% endfor %}
         </tbody>

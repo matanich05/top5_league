@@ -1,52 +1,58 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 
 {% block title %}{{ liga['name'] }}{% endblock %}
 
 {% block content %}
 <div class="card">
-    <h2>{{ liga['name'] }}</h2>
+    <h2><span class="flag flag-{{ league_flag_class(liga['name']) }}"></span>{{ liga['name'] }}</h2>
     <p>Sezona: {{ liga['season'] }}</p>
 </div>
 
-<div class="grid">
-    <div class="card">
-        <h3>Lestvica</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Ekipa</th>
-                    <th>OD</th>
-                    <th>Z</th>
-                    <th>R</th>
-                    <th>P</th>
-                    <th>Goli</th>
-                    <th>Točke</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for vrstica in lestvica %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>
-                        <a href="/team/{{ vrstica['team_id'] }}">{{ vrstica['name'] }}</a>
-                    </td>
-                    <td>{{ vrstica['played'] or 0 }}</td>
-                    <td>{{ vrstica['wins'] or 0 }}</td>
-                    <td>{{ vrstica['draws'] or 0 }}</td>
-                    <td>{{ vrstica['losses'] or 0 }}</td>
-                    <td>{{ (vrstica['goals_for'] or 0) }} : {{ (vrstica['goals_against'] or 0) }}</td>
-                    <td><strong>{{ vrstica['points'] or 0 }}</strong></td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="8">Ni podatkov za lestvico.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div class="card">
+    <h3>Lestvica</h3>
+    <div class="table-scroll">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ekipa</th>
+                <th>Odigrane</th>
+                <th>Zmage</th>
+                <th>Remiji</th>
+                <th>Porazi</th>
+                <th>Dani goli</th>
+                <th>Prejeti goli</th>
+                <th>Razlika</th>
+                <th>Točke</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vrstica in lestvica %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    <a href="/team/{{ vrstica['team_id'] }}">{{ vrstica['name'] }}</a>
+                </td>
+                <td>{{ vrstica['played'] or 0 }}</td>
+                <td>{{ vrstica['wins'] or 0 }}</td>
+                <td>{{ vrstica['draws'] or 0 }}</td>
+                <td>{{ vrstica['losses'] or 0 }}</td>
+                <td>{{ vrstica['goals_for'] or 0 }}</td>
+                <td>{{ vrstica['goals_against'] or 0 }}</td>
+                <td>{{ (vrstica['goals_for'] or 0) - (vrstica['goals_against'] or 0) }}</td>
+                <td><strong>{{ vrstica['points'] or 0 }}</strong></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="10">Ni podatkov za lestvico.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     </div>
+</div>
 
+<div class="grid">
     <div class="card">
         <h3>Top strelci lige</h3>
         <table>
@@ -113,36 +119,6 @@
 </div>
 
 <div class="card">
-    <h3>Ekipe</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Ime ekipe</th>
-                <th>Mesto</th>
-                <th>Stadion</th>
-                <th>Leto ustanovitve</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for ekipa in ekipe %}
-            <tr>
-                <td>
-                    <a href="/team/{{ ekipa['team_id'] }}">{{ ekipa['name'] }}</a>
-                </td>
-                <td>{{ ekipa['city'] or '-' }}</td>
-                <td>{{ ekipa['stadium'] or '-' }}</td>
-                <td>{{ ekipa['founded_year'] or '-' }}</td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="4">Ni ekip.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-
-<div class="card">
     <h3>Tekme</h3>
 
     <form class="filter-form" method="get" action="/league/{{ liga['league_id'] }}">
@@ -193,3 +169,5 @@
     </table>
 </div>
 {% endblock %}
+
+
