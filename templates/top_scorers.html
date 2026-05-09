@@ -36,7 +36,6 @@
                 <th>Liga</th>
                 <th>Tekme</th>
                 <th>Goli</th>
-                <th>Asistence</th>
             </tr>
         </thead>
         <tbody>
@@ -56,11 +55,10 @@
                 </td>
                 <td>{{ igralec['matches_played'] }}</td>
                 <td><strong>{{ igralec['goals'] }}</strong></td>
-                <td>{{ igralec['assists'] }}</td>
             </tr>
             {% else %}
             <tr>
-                <td colspan="8">Ni podatkov.</td>
+                <td colspan="7">Ni podatkov.</td>
             </tr>
             {% endfor %}
         </tbody>

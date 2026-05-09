@@ -776,49 +776,11 @@ def match_detail(match_id):
         conn.close()
         abort(404)
 
-    home_players = conn.execute("""
-        SELECT
-            p.player_id,
-            p.name AS player_name,
-            p.position,
-            COALESCE(pss.matches_played, 0) AS matches_played,
-            COALESCE(pss.starts, 0) AS starts,
-            COALESCE(pss.minutes_played, 0) AS minutes_played,
-            COALESCE(pss.goals, 0) AS goals,
-            COALESCE(pss.assists, 0) AS assists,
-            COALESCE(pss.yellow_cards, 0) AS yellow_cards,
-            COALESCE(pss.red_cards, 0) AS red_cards
-        FROM player p
-        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
-        WHERE p.team_id = ?
-        ORDER BY p.name;
-    """, (tekma["home_team_id"],)).fetchall()
-
-    away_players = conn.execute("""
-        SELECT
-            p.player_id,
-            p.name AS player_name,
-            p.position,
-            COALESCE(pss.matches_played, 0) AS matches_played,
-            COALESCE(pss.starts, 0) AS starts,
-            COALESCE(pss.minutes_played, 0) AS minutes_played,
-            COALESCE(pss.goals, 0) AS goals,
-            COALESCE(pss.assists, 0) AS assists,
-            COALESCE(pss.yellow_cards, 0) AS yellow_cards,
-            COALESCE(pss.red_cards, 0) AS red_cards
-        FROM player p
-        LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
-        WHERE p.team_id = ?
-        ORDER BY p.name;
-    """, (tekma["away_team_id"],)).fetchall()
-
     conn.close()
 
     return render_template(
         "match_detail.html",
-        tekma=tekma,
-        home_players=home_players,
-        away_players=away_players
+        tekma=tekma
     )
 
 
