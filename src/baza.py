@@ -1,30 +1,36 @@
 import csv
 from pathlib import Path
 
-PARAM_FMT = ":{}"
-BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data"
+parameter_form = ":{}"
+base_directory = Path(__file__).resolve().parent.parent
+data_directory = base_directory / "data"
 
 
 class Tabela:
+    """Osnovni razred za ustvarjanje tabel in uvoz podatkov iz CSV datotek."""
+
     ime = None
     pk = None
     podatki = None
 
     def __init__(self, conn):
+        """Shrani povezavo na podatkovno bazo za delo s tabelo."""
         self.conn = conn
 
     def ustvari(self):
+        """Ustvari tabelo v bazi; podrazredi morajo definirati svojo implementacijo."""
         raise NotImplementedError
 
     def izbrisi_tabelo(self):
+        """Izbrise tabelo iz baze, ce tabela obstaja."""
         self.conn.execute(f"DROP TABLE IF EXISTS {self.ime};")
 
     def uvozi(self, encoding="utf-8"):
+        """Uvozi podatke iz pripadajoce CSV datoteke v tabelo."""
         if self.podatki is None:
             return
 
-        pot = DATA_DIR / self.podatki
+        pot = data_directory / self.podatki
         if not pot.exists():
             return
 
@@ -35,12 +41,14 @@ class Tabela:
                 self.dodaj_vrstico(**row)
 
     def dodajanje(self, stolpci):
+        """Vrne SQL poizvedbo INSERT za podane stolpce."""
         return f"""
             INSERT INTO {self.ime} ({", ".join(stolpci)})
-            VALUES ({", ".join(PARAM_FMT.format(s) for s in stolpci)});
+            VALUES ({", ".join(parameter_form.format(s) for s in stolpci)});
         """
 
     def dodaj_vrstico(self, **podatki):
+        """Doda eno vrstico v tabelo in vrne njen ustvarjeni primarni kljuc."""
         podatki = {k: v for k, v in podatki.items() if v is not None}
         poizvedba = self.dodajanje(podatki.keys())
         cur = self.conn.execute(poizvedba, podatki)
@@ -48,13 +56,17 @@ class Tabela:
 
 
 class League:
+    """Predstavlja eno nogometno ligo in njeno sezono."""
+
     def __init__(self, league_id, name, season):
+        """Ustvari objekt lige s podatki iz tabele league."""
         self.league_id = league_id
         self.name = name
         self.season = season
 
     @staticmethod
     def poisci_vse(conn):
+        """Vrne generator vseh lig iz baze, urejenih po ID-ju."""
         cur = conn.execute("""
             SELECT league_id, name, season
             FROM league
@@ -65,6 +77,7 @@ class League:
 
     @staticmethod
     def poisci_po_id(conn, league_id):
+        """Vrne ligo z izbranim ID-jem ali None, ce liga ne obstaja."""
         cur = conn.execute("""
             SELECT league_id, name, season
             FROM league
@@ -76,6 +89,7 @@ class League:
         return League(*row)
 
     def vstavi(self, conn):
+        """Vstavi ligo v bazo in vrne njen novi ID."""
         cur = conn.execute("""
             INSERT INTO league (name, season)
             VALUES (:name, :season);
@@ -87,6 +101,7 @@ class League:
         return self.league_id
 
     def posodobi(self, conn):
+        """Posodobi podatke obstojece lige v bazi."""
         conn.execute("""
             UPDATE league
             SET name = :name,
@@ -99,6 +114,7 @@ class League:
         })
 
     def izbrisi(self, conn):
+        """Izbrise ligo iz baze glede na njen ID."""
         conn.execute("""
             DELETE FROM league
             WHERE league_id = :league_id;
@@ -106,7 +122,10 @@ class League:
 
 
 class Team:
+    """Predstavlja eno ekipo oziroma klub v izbrani ligi."""
+
     def __init__(self, team_id, league_id, name, city, stadium, founded_year):
+        """Ustvari objekt ekipe s podatki iz tabele team."""
         self.team_id = team_id
         self.league_id = league_id
         self.name = name
@@ -116,6 +135,7 @@ class Team:
 
     @staticmethod
     def poisci_vse(conn):
+        """Vrne generator vseh ekip iz baze, urejenih po ID-ju."""
         cur = conn.execute("""
             SELECT team_id, league_id, name, city, stadium, founded_year
             FROM team
@@ -126,6 +146,7 @@ class Team:
 
     @staticmethod
     def poisci_po_id(conn, team_id):
+        """Vrne ekipo z izbranim ID-jem ali None, ce ekipa ne obstaja."""
         cur = conn.execute("""
             SELECT team_id, league_id, name, city, stadium, founded_year
             FROM team
@@ -138,6 +159,7 @@ class Team:
 
     @staticmethod
     def poisci_po_ligi(conn, league_id):
+        """Vrne generator vseh ekip v izbrani ligi, urejenih po imenu."""
         cur = conn.execute("""
             SELECT team_id, league_id, name, city, stadium, founded_year
             FROM team
@@ -148,6 +170,7 @@ class Team:
             yield Team(*row)
 
     def vstavi(self, conn):
+        """Vstavi ekipo v bazo in vrne njen novi ID."""
         cur = conn.execute("""
             INSERT INTO team (league_id, name, city, stadium, founded_year)
             VALUES (:league_id, :name, :city, :stadium, :founded_year);
@@ -162,6 +185,7 @@ class Team:
         return self.team_id
 
     def posodobi(self, conn):
+        """Posodobi podatke obstojece ekipe v bazi."""
         conn.execute("""
             UPDATE team
             SET league_id = :league_id,
@@ -180,6 +204,7 @@ class Team:
         })
 
     def izbrisi(self, conn):
+        """Izbrise ekipo iz baze glede na njen ID."""
         conn.execute("""
             DELETE FROM team
             WHERE team_id = :team_id;
@@ -187,7 +212,10 @@ class Team:
 
 
 class Player:
+    """Predstavlja enega igralca, ki pripada doloceni ekipi."""
+
     def __init__(self, player_id, team_id, name, age, nationality, position):
+        """Ustvari objekt igralca s podatki iz tabele player."""
         self.player_id = player_id
         self.team_id = team_id
         self.name = name
@@ -197,6 +225,7 @@ class Player:
 
     @staticmethod
     def poisci_vse(conn):
+        """Vrne generator vseh igralcev iz baze, urejenih po ID-ju."""
         cur = conn.execute("""
             SELECT player_id, team_id, name, age, nationality, position
             FROM player
@@ -207,6 +236,7 @@ class Player:
 
     @staticmethod
     def poisci_po_id(conn, player_id):
+        """Vrne igralca z izbranim ID-jem ali None, ce igralec ne obstaja."""
         cur = conn.execute("""
             SELECT player_id, team_id, name, age, nationality, position
             FROM player
@@ -219,6 +249,7 @@ class Player:
 
     @staticmethod
     def poisci_po_ekipi(conn, team_id):
+        """Vrne generator vseh igralcev izbrane ekipe, urejenih po imenu."""
         cur = conn.execute("""
             SELECT player_id, team_id, name, age, nationality, position
             FROM player
@@ -229,6 +260,7 @@ class Player:
             yield Player(*row)
 
     def vstavi(self, conn):
+        """Vstavi igralca v bazo in vrne njegov novi ID."""
         cur = conn.execute("""
             INSERT INTO player (team_id, name, age, nationality, position)
             VALUES (:team_id, :name, :age, :nationality, :position);
@@ -243,6 +275,7 @@ class Player:
         return self.player_id
 
     def posodobi(self, conn):
+        """Posodobi podatke obstojecega igralca v bazi."""
         conn.execute("""
             UPDATE player
             SET team_id = :team_id,
@@ -261,6 +294,7 @@ class Player:
         })
 
     def izbrisi(self, conn):
+        """Izbrise igralca iz baze glede na njegov ID."""
         conn.execute("""
             DELETE FROM player
             WHERE player_id = :player_id;
@@ -268,7 +302,10 @@ class Player:
 
 
 class Match:
+    """Predstavlja eno odigrano tekmo med domaco in gostujoco ekipo."""
+
     def __init__(self, match_id, league_id, home_team_id, away_team_id, match_date, round_number):
+        """Ustvari objekt tekme s podatki iz tabele match."""
         self.match_id = match_id
         self.league_id = league_id
         self.home_team_id = home_team_id
@@ -278,6 +315,7 @@ class Match:
 
     @staticmethod
     def poisci_vse(conn):
+        """Vrne generator vseh tekem iz baze, urejenih po datumu in ID-ju."""
         cur = conn.execute("""
             SELECT match_id, league_id, home_team_id, away_team_id, match_date, round_number
             FROM match
@@ -288,6 +326,7 @@ class Match:
 
     @staticmethod
     def poisci_po_id(conn, match_id):
+        """Vrne tekmo z izbranim ID-jem ali None, ce tekma ne obstaja."""
         cur = conn.execute("""
             SELECT match_id, league_id, home_team_id, away_team_id, match_date, round_number
             FROM match
@@ -300,6 +339,7 @@ class Match:
 
     @staticmethod
     def poisci_po_ligi(conn, league_id):
+        """Vrne generator vseh tekem izbrane lige, urejenih po krogu in datumu."""
         cur = conn.execute("""
             SELECT match_id, league_id, home_team_id, away_team_id, match_date, round_number
             FROM match
@@ -310,6 +350,7 @@ class Match:
             yield Match(*row)
 
     def vstavi(self, conn):
+        """Vstavi tekmo v bazo in vrne njen novi ID."""
         cur = conn.execute("""
             INSERT INTO match (league_id, home_team_id, away_team_id, match_date, round_number)
             VALUES (:league_id, :home_team_id, :away_team_id, :match_date, :round_number);
@@ -324,6 +365,7 @@ class Match:
         return self.match_id
 
     def posodobi(self, conn):
+        """Posodobi podatke obstojece tekme v bazi."""
         conn.execute("""
             UPDATE match
             SET league_id = :league_id,
@@ -342,6 +384,7 @@ class Match:
         })
 
     def izbrisi(self, conn):
+        """Izbrise tekmo iz baze glede na njen ID."""
         conn.execute("""
             DELETE FROM match
             WHERE match_id = :match_id;
@@ -349,7 +392,10 @@ class Match:
 
 
 class MatchStats:
+    """Predstavlja statistiko ene tekme, na primer gole, strele in kartone."""
+
     def __init__(self, match_id, home_goals, away_goals, home_shots, away_shots, home_yellow, away_yellow, home_red, away_red):
+        """Ustvari objekt statistike tekme s podatki iz tabele match_stats."""
         self.match_id = match_id
         self.home_goals = home_goals
         self.away_goals = away_goals
@@ -362,6 +408,7 @@ class MatchStats:
 
     @staticmethod
     def poisci_vse(conn):
+        """Vrne generator vseh statistik tekem, urejenih po ID-ju tekme."""
         cur = conn.execute("""
             SELECT match_id, home_goals, away_goals, home_shots, away_shots,
                    home_yellow, away_yellow, home_red, away_red
@@ -373,6 +420,7 @@ class MatchStats:
 
     @staticmethod
     def poisci_po_id(conn, match_id):
+        """Vrne statistiko izbrane tekme ali None, ce statistika ne obstaja."""
         cur = conn.execute("""
             SELECT match_id, home_goals, away_goals, home_shots, away_shots,
                    home_yellow, away_yellow, home_red, away_red
@@ -385,6 +433,7 @@ class MatchStats:
         return MatchStats(*row)
 
     def vstavi(self, conn):
+        """Vstavi statistiko tekme v bazo in vrne ID tekme."""
         conn.execute("""
             INSERT INTO match_stats (
                 match_id, home_goals, away_goals, home_shots, away_shots,
@@ -398,6 +447,7 @@ class MatchStats:
         return self.match_id
 
     def posodobi(self, conn):
+        """Posodobi statistiko obstojece tekme v bazi."""
         conn.execute("""
             UPDATE match_stats
             SET home_goals = :home_goals,
@@ -412,6 +462,7 @@ class MatchStats:
         """, self.__dict__)
 
     def izbrisi(self, conn):
+        """Izbrise statistiko tekme iz baze glede na ID tekme."""
         conn.execute("""
             DELETE FROM match_stats
             WHERE match_id = :match_id;
@@ -419,10 +470,13 @@ class MatchStats:
 
 
 class LeagueTabela(Tabela):
+    """Opisuje SQL tabelo league in CSV datoteko, iz katere se napolni."""
+
     ime = "league"
     podatki = "league.csv"
 
     def ustvari(self):
+        """Ustvari tabelo league z ligami in sezonami."""
         self.conn.execute("""
             CREATE TABLE league (
                 league_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -434,10 +488,13 @@ class LeagueTabela(Tabela):
 
 
 class TeamTabela(Tabela):
+    """Opisuje SQL tabelo team in CSV datoteko, iz katere se napolni."""
+
     ime = "team"
     podatki = "team.csv"
 
     def ustvari(self):
+        """Ustvari tabelo team z ekipami in povezavo na ligo."""
         self.conn.execute("""
             CREATE TABLE team (
                 team_id      INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -453,10 +510,13 @@ class TeamTabela(Tabela):
 
 
 class PlayerTabela(Tabela):
+    """Opisuje SQL tabelo player in CSV datoteko, iz katere se napolni."""
+
     ime = "player"
     podatki = "player.csv"
 
     def ustvari(self):
+        """Ustvari tabelo player z igralci in povezavo na ekipo."""
         self.conn.execute("""
             CREATE TABLE player (
                 player_id    INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -472,10 +532,13 @@ class PlayerTabela(Tabela):
 
 
 class MatchTabela(Tabela):
+    """Opisuje SQL tabelo match in CSV datoteko, iz katere se napolni."""
+
     ime = "match"
     podatki = "match.csv"
 
     def ustvari(self):
+        """Ustvari tabelo match s tekmami in povezavami na ligo ter ekipi."""
         self.conn.execute("""
             CREATE TABLE match (
                 match_id      INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -493,10 +556,13 @@ class MatchTabela(Tabela):
 
 
 class MatchStatsTabela(Tabela):
+    """Opisuje SQL tabelo match_stats in CSV datoteko, iz katere se napolni."""
+
     ime = "match_stats"
     podatki = "match_stats.csv"
 
     def ustvari(self):
+        """Ustvari tabelo match_stats s statistiko posamezne tekme."""
         self.conn.execute("""
             CREATE TABLE match_stats (
                 match_id     INTEGER PRIMARY KEY,
@@ -514,10 +580,13 @@ class MatchStatsTabela(Tabela):
 
 
 class PlayerSeasonStatsTabela(Tabela):
+    """Opisuje SQL tabelo player_season_stats in CSV datoteko, iz katere se napolni."""
+
     ime = "player_season_stats"
     podatki = "player_season_stats.csv"
 
     def ustvari(self):
+        """Ustvari tabelo player_season_stats s sezonsko statistiko igralcev."""
         self.conn.execute("""
             CREATE TABLE player_season_stats (
                 player_id      INTEGER PRIMARY KEY,
@@ -534,6 +603,7 @@ class PlayerSeasonStatsTabela(Tabela):
 
 
 def pripravi_tabele(conn):
+    """Vrne seznam objektov tabel v vrstnem redu ustvarjanja in uvoza."""
     return [
         LeagueTabela(conn),
         TeamTabela(conn),
@@ -545,21 +615,25 @@ def pripravi_tabele(conn):
 
 
 def ustvari_tabele(tabele):
+    """Ustvari vse tabele iz podanega seznama tabel."""
     for tabela in tabele:
         tabela.ustvari()
 
 
 def izbrisi_tabele(tabele):
+    """Izbrise vse tabele v obratnem vrstnem redu zaradi tujih kljucev."""
     for tabela in reversed(tabele):
         tabela.izbrisi_tabelo()
 
 
 def uvozi_podatke(tabele):
+    """Uvozi CSV podatke v vse tabele iz podanega seznama."""
     for tabela in tabele:
         tabela.uvozi()
 
 
 def ustvari_bazo(conn):
+    """Ponovno ustvari celotno bazo in vanjo uvozi zacetne CSV podatke."""
     conn.execute("PRAGMA foreign_keys = ON;")
     tabele = pripravi_tabele(conn)
     izbrisi_tabele(tabele)
