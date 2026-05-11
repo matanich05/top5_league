@@ -1,5 +1,4 @@
 team_id,name,age,nationality,position
-3,Max Aarons,24.0,ENG,DF
 37,Max Aarons,24.0,ENG,DF
 37,Rodrigo Abajas,21.0,ESP,DF
 94,James Abankwah,20.0,IRL,DF
@@ -16,12 +15,10 @@ team_id,name,age,nationality,position
 47,Abner,24.0,BRA,DF
 58,Zakaria Aboukhlal,24.0,MAR,MF
 21,Abdel Abqar,25.0,MAR,DF
-92,Tammy Abraham,26.0,ENG,FW
 88,Tammy Abraham,26.0,ENG,FW
 83,Federico Accornero,20.0,ITA,MF
 84,Francesco Acerbi,36.0,ITA,DF
 6,Joshua Acheampong,18.0,ENG,DF
-35,Akor Adams,24.0,NGA,FW
 50,Akor Adams,24.0,NGA,FW
 93,Che Adams,28.0,SCO,FW
 3,Tyler Adams,25.0,USA,MF
@@ -38,7 +35,6 @@ team_id,name,age,nationality,position
 78,Michel Aebischer,27.0,SUI,MF
 72,Oladapo Afolayan,26.0,ENG,FW
 20,Emmanuel Agbadou,27.0,CIV,DF
-54,Emmanuel Agbadou,27.0,CIV,DF
 7,Asher Agbinone,18.0,ENG,MF
 45,Jeremy Agbonifo,18.0,SWE,FW
 22,Julen Agirrezabala,23.0,ESP,GK
@@ -53,7 +49,6 @@ team_id,name,age,nationality,position
 72,Erik Ahlstrand,22.0,SWE,FW
 41,Jean-Eudes Aholou,30.0,CIV,MF
 38,Joseph Aidoo,28.0,GHA,DF
-26,Joseph Aidoo,28.0,GHA,DF
 56,Ayman Aiki,19.0,FRA,FW
 16,Ola Aina,27.0,NGA,DF
 20,Rayan Aït-Nouri,23.0,ALG,DF
@@ -76,10 +71,8 @@ team_id,name,age,nationality,position
 38,Ibrahim Alani,18.0,NGA,MF
 72,Andreas Albers,34.0,DEN,FW
 40,Raúl Albiol,38.0,ESP,DF
-17,Carlos Alcaraz,21.0,ARG,MF
 8,Carlos Alcaraz,21.0,ARG,FW
 28,Omar Alderete,27.0,PAR,DF
-28,Carles Aleñá,26.0,ESP,MF
 21,Carles Aleñá,26.0,ESP,MF
 72,Ben Alexander Voll,23.0,GER,GK
 12,Trent Alexander-Arnold,25.0,ENG,DF
@@ -114,13 +107,10 @@ team_id,name,age,nationality,position
 51,Kelvin Amian,26.0,FRA,DF
 48,Michael Amir Murillo,28.0,PAN,DF
 70,Nadiem Amiri,27.0,GER,MF
-17,Samuel Amo-Ameyaw,18.0,ENG,FW
 57,Samuel Amo-Ameyaw,18.0,ENG,DF
-6,Mathis Amougou,18.0,FRA,MF
 56,Mathis Amougou,18.0,FRA,MF
 76,Mohamed Amoura,24.0,ALG,FW
 82,Sofyan Amrabat,27.0,MAR,MF
-7,Joachim Andersen,28.0,DEN,DF
 9,Joachim Andersen,28.0,DEN,DF
 16,Elliot Anderson,21.0,ENG,MF
 20,André,23.0,BRA,MF
@@ -135,7 +125,6 @@ team_id,name,age,nationality,position
 45,Kyllian Antonio,16.0,FRA,DF
 19,Michail Antonio,34.0,JAM,FW
 27,Antoniu,21.0,ESP,FW
-14,Antony,24.0,BRA,DF
 25,Antony,24.0,BRA,FW
 38,Anuar,29.0,MAR,MF
 56,Dennis Appiah,32.0,FRA,DF
@@ -164,7 +153,6 @@ team_id,name,age,nationality,position
 32,Takuma Asano,29.0,JPN,FW
 34,Raúl Asencio,21.0,ESP,DF
 2,Marco Asensio,28.0,ESP,MF
-53,Marco Asensio,28.0,ESP,FW
 84,Kristjan Asllani,22.0,ALB,MF
 26,Iago Aspas,36.0,ESP,FW
 29,Yaser Asprilla,20.0,COL,FW
@@ -183,12 +171,10 @@ team_id,name,age,nationality,position
 5,Yasin Ayari,20.0,SWE,MF
 42,Florian Ayé,27.0,FRA,FW
 44,André Ayew,34.0,GHA,FW
-7,Jordan Ayew,32.0,GHA,FW
 11,Jordan Ayew,32.0,GHA,FW
 45,Neil El Aynaoui,23.0,FRA,MF
 62,Ayman Azhil,23.0,MAR,MF
 38,Adam Aznou,18.0,MAR,DF
-60,Adam Aznou,18.0,MAR,DF
 23,César Azpilicueta,34.0,ESP,DF
 79,Paulo Azzi,30.0,BRA,DF
 78,Oussama El Azzouzi,23.0,MAR,MF
@@ -201,16 +187,13 @@ team_id,name,age,nationality,position
 6,Benoît Badiashile,23.0,FRA,DF
 40,Alex Baena,23.0,ESP,MF
 38,Juma Bah,18.0,SLE,DF
-45,Juma Bah,18.0,SLE,DF
 2,Leon Bailey,26.0,JAM,FW
 40,Eric Bailly,30.0,CIV,DF
 42,Theo Bair,24.0,CAN,FW
 30,Stefan Bajcetic,19.0,ESP,MF
 25,Cédric Bakambu,33.0,COD,FW
-77,Mitchel Bakker,24.0,NED,MF
 46,Mitchel Bakker,24.0,NED,FW
 48,Darryl Bakola,16.0,FRA,DF
-76,Ridle Baku,26.0,GER,FW
 71,Ridle Baku,26.0,GER,DF
 57,Dilane Bakwa,21.0,FRA,MF
 92,Tommaso Baldanzi,21.0,ITA,MF
@@ -235,7 +218,6 @@ team_id,name,age,nationality,position
 38,Adrian Baquerin,17.0,ESP,FW
 82,Antonín Barák,29.0,CZE,MF
 80,Federico Barba,30.0,ITA,DF
-35,Valentín Barco,20.0,ARG,DF
 57,Valentín Barco,20.0,ARG,MF
 53,Bradley Barcola,21.0,FRA,FW
 52,Melvin Bard,23.0,FRA,DF
@@ -278,12 +260,10 @@ team_id,name,age,nationality,position
 36,Luken Beitia,20.0,ESP,DF
 28,Ismael Bekhoucha,19.0,MAR,MF
 96,Reda Belahyane,20.0,MAR,MF
-86,Reda Belahyane,20.0,MAR,MF
 41,Haris Belkebla,30.0,ALG,MF
 41,Yassin Belkhdim,22.0,FRA,MF
 70,Stefan Bell,32.0,GER,DF
 17,Armel Bella Kotchap,22.0,GER,DF
-93,Raoul Bellanova,24.0,ITA,DF
 77,Raoul Bellanova,24.0,ITA,DF
 20,Jean-Ricner Bellegarde,26.0,FRA,MF
 25,Héctor Bellerín,29.0,ESP,DF
@@ -297,7 +277,6 @@ team_id,name,age,nationality,position
 91,Adrian Benedyczak,23.0,POL,FW
 74,László Bénes,26.0,SVK,MF
 33,Iker Benito,21.0,ESP,FW
-88,Ismaël Bennacer,26.0,ALG,MF
 48,Ismaël Bennacer,26.0,ALG,MF
 47,Saïd Benrahma,28.0,ALG,FW
 62,Ramy Bensebaini,29.0,ALG,DF
@@ -311,11 +290,9 @@ team_id,name,age,nationality,position
 18,Lucas Bergvall,18.0,SWE,MF
 87,Medon Berisha,20.0,ALB,MF
 66,Mergim Berisha,26.0,GER,FW
-59,Mergim Berisha,26.0,GER,FW
 91,Adrian Bernabe,23.0,ESP,MF
 24,Marc Bernal,17.0,ESP,MF
 61,Bernardo,29.0,BRA,DF
-40,Juan Bernat,31.0,ESP,DF
 28,Juan Bernat,31.0,ESP,MF
 56,Maxime Bernauer,26.0,FRA,DF
 96,Antoine Bernede,25.0,FRA,MF
@@ -328,14 +305,11 @@ team_id,name,age,nationality,position
 8,Beto,26.0,GNB,FW
 78,Sam Beukema,25.0,NED,DF
 89,Alessandro Bianco,21.0,ITA,MF
-82,Alessandro Bianco,21.0,ITA,MF
 49,Mika Biereth,21.0,DEN,FW
 94,Jaka Bijol,25.0,SVN,DF
 73,El Bilal Touré,22.0,MLI,FW
-3,Philip Billing,28.0,DEN,MF
 90,Philip Billing,28.0,DEN,MF
 93,Cristiano Biraghi,31.0,ITA,DF
-82,Cristiano Biraghi,31.0,ITA,DF
 89,Samuele Birindelli,25.0,ITA,DF
 66,Tom Bischof,19.0,GER,MF
 18,Yves Bissouma,27.0,MLI,MF
@@ -358,7 +332,6 @@ team_id,name,age,nationality,position
 16,Willy Boly,33.0,CIV,DF
 52,Moïse Bombito,24.0,CAN,DF
 89,Warren Bondo,20.0,FRA,MF
-88,Warren Bondo,20.0,FRA,MF
 68,Victor Boniface,23.0,NGA,FW
 87,Kevin Bonifazi,28.0,ITA,DF
 91,Ange-Yoan Bonny,20.0,FRA,FW
@@ -375,14 +348,12 @@ team_id,name,age,nationality,position
 82,Edoardo Bove,22.0,ITA,MF
 19,Jarrod Bowen,27.0,ENG,FW
 33,Enzo Boyomo,22.0,CMR,DF
-38,Enzo Boyomo,22.0,CMR,DF
 96,Domagoj Bradarić,24.0,CRO,DF
 12,Conor Bradley,21.0,NIR,DF
 52,Bilal Brahimi,24.0,ALG,MF
 62,Julian Brandt,28.0,GER,MF
 8,Jarrad Branthwaite,22.0,ENG,DF
 31,Darko Brašanac,32.0,SRB,MF
-48,Lilian Brassier,24.0,FRA,DF
 55,Lilian Brassier,24.0,FRA,DF
 80,Matthias Braunöder,22.0,AUT,MF
 94,Iker Bravo,19.0,ESP,FW
@@ -400,12 +371,9 @@ team_id,name,age,nationality,position
 89,Arvid Brorsson,25.0,SWE,DF
 61,Moritz Broschinski,23.0,GER,FW
 63,Nathaniel Brown,21.0,GER,DF
-66,Jacob Bruun Larsen,25.0,DEN,FW
 73,Jacob Bruun Larsen,25.0,DEN,MF
-84,Tajon Buchanan,25.0,CAN,DF
 40,Tajon Buchanan,25.0,CAN,MF
 33,Ante Budimir,33.0,CRO,FW
-2,Emi Buendía,27.0,ARG,MF
 68,Emi Buendía,27.0,ARG,MF
 35,Manu Bueno,20.0,ESP,MF
 20,Santiago Bueno,25.0,URU,DF
@@ -425,7 +393,6 @@ team_id,name,age,nationality,position
 80,Jean Butez,29.0,FRA,GK
 1,Nathan Butler-Oyedeji,21.0,ENG,FW
 52,Marcin Bułka,24.0,POL,GK
-40,Pau Cabanes,19.0,ESP,MF
 21,Pau Cabanes,19.0,ESP,MF
 46,Rémy Cabella,34.0,FRA,FW
 27,Leandro Cabrera,33.0,URU,DF
@@ -437,7 +404,6 @@ team_id,name,age,nationality,position
 9,Tom Cairney,33.0,SCO,MF
 10,Jens Cajuste,24.0,SWE,MF
 78,Davide Calabria,27.0,ITA,DF
-88,Davide Calabria,27.0,ITA,DF
 1,Riccardo Calafiori,22.0,ITA,DF
 89,Luca Caldirola,33.0,ITA,DF
 27,Fernando Calero,28.0,ESP,DF
@@ -463,23 +429,19 @@ team_id,name,age,nationality,position
 91,Matteo Cancellieri,22.0,ITA,FW
 95,Fali Candé,26.0,GNB,DF
 95,Antonio Candela,24.0,ITA,DF
-38,Antonio Candela,24.0,ITA,DF
 37,Sergi Canós,27.0,ESP,MF
 58,Jaydee Canvot,18.0,FRA,DF
 41,Pierrick Capelle,37.0,FRA,MF
 89,Gianluca Caprari,31.0,ITA,MF
 79,Elia Caprile,22.0,ITA,GK
-90,Elia Caprile,22.0,ITA,GK
 45,Gabin Capuano,18.0,FRA,FW
 81,Francesco Caputo,36.0,ITA,FW
 80,Maxence Caqueret,24.0,FRA,MF
-47,Maxence Caqueret,24.0,FRA,MF
 50,Simon Cara,19.0,FRA,MF
 89,Andrea Carboni,23.0,ITA,DF
 95,Franco Carboni,21.0,ITA,DF
 48,Valentin Carboni,19.0,ARG,MF
 39,Dani Cárdenas,27.0,ESP,GK
-27,Irvin Cardona,26.0,FRA,FW
 56,Irvin Cardona,26.0,FRA,FW
 30,Marc Cardona,29.0,ESP,FW
 40,Sergi Cardona,25.0,ESP,DF
@@ -497,7 +459,6 @@ team_id,name,age,nationality,position
 93,Cesare Casadei,21.0,ITA,MF
 24,Marc Casado,20.0,ESP,MF
 78,Nicolò Casale,26.0,ITA,DF
-86,Nicolò Casale,26.0,ITA,DF
 14,Casemiro,32.0,BRA,MF
 19,Kaelan Casey,19.0,ENG,DF
 2,Matty Cash,26.0,POL,DF
@@ -510,7 +471,6 @@ team_id,name,age,nationality,position
 51,Jean-Charles Castelletto,29.0,CMR,DF
 78,Santiago Castro,19.0,ARG,FW
 89,Gaetano Castrovilli,27.0,ITA,MF
-86,Gaetano Castrovilli,27.0,ITA,MF
 82,Danilo Cataldi,29.0,ITA,MF
 33,Catena,29.0,ESP,DF
 37,Maximiliano Caufriez,27.0,BEL,DF
@@ -525,7 +485,6 @@ team_id,name,age,nationality,position
 71,El Chadaille Bitshiabu,19.0,FRA,DF
 63,Fares Chaïbi,21.0,ALG,MF
 7,Trevoh Chalobah,25.0,ENG,DF
-6,Trevoh Chalobah,25.0,ENG,DF
 63,Timothy Chandler,34.0,USA,DF
 10,Conor Chaplin,27.0,ENG,MF
 43,Brendan Chardonnet,29.0,FRA,DF
@@ -535,7 +494,6 @@ team_id,name,age,nationality,position
 39,Pep Chavarría,26.0,ESP,DF
 66,Arthur Chaves,23.0,BRA,DF
 45,Jhoanner Chávez,22.0,ECU,DF
-90,Walid Cheddira,26.0,MAR,FW
 27,Walid Cheddira,26.0,MAR,FW
 34,Chema,19.0,ESP,MF
 50,Théo Chennahi,19.0,FRA,DF
@@ -548,7 +506,6 @@ team_id,name,age,nationality,position
 91,Leandro Chichizola,34.0,ARG,GK
 12,Federico Chiesa,26.0,ITA,FW
 7,Ben Chilwell,27.0,ENG,DF
-20,Chiquinho,24.0,POR,MF
 32,Chiquinho,24.0,POR,MF
 51,Pedro Chirivella,27.0,ESP,MF
 50,Joris Chotard,22.0,FRA,MF
@@ -599,7 +556,6 @@ team_id,name,age,nationality,position
 51,Francis Coquelin,33.0,FRA,MF
 37,Iker Córdoba,18.0,ESP,DF
 48,Derek Cornelius,26.0,CAN,DF
-17,Maxwel Cornet,27.0,CIV,FW
 83,Maxwel Cornet,27.0,CIV,FW
 56,Pierre Cornud,27.0,FRA,DF
 23,Ángel Correa,29.0,ARG,FW
@@ -610,7 +566,6 @@ team_id,name,age,nationality,position
 70,Danny da Costa,31.0,GER,DF
 45,David Costa,23.0,POR,MF
 40,Logan Costa,23.0,CPV,DF
-58,Logan Costa,23.0,CPV,DF
 32,Samu Costa,23.0,POR,MF
 43,Grégoire Coudert,25.0,FRA,GK
 19,Vladimír Coufal,31.0,CZE,DF
@@ -619,7 +574,6 @@ team_id,name,age,nationality,position
 49,Mamadou Coulibaly,20.0,FRA,MF
 43,Soumaïla Coulibaly,20.0,FRA,DF
 50,Tanguy Coulibaly,23.0,FRA,FW
-11,Woyo Coulibaly,25.0,MLI,DF
 91,Woyo Coulibaly,25.0,MLI,DF
 41,Marius Courcoul,17.0,FRA,MF
 34,Thibaut Courtois,32.0,BEL,GK
@@ -655,11 +609,9 @@ team_id,name,age,nationality,position
 96,Flavius Daniliuc,23.0,AUT,DF
 16,Danilo,23.0,BRA,MF
 85,Danilo,33.0,BRA,DF
-40,Arnaut Danjuma,27.0,NED,FW
 29,Arnaut Danjuma,27.0,NED,FW
 12,Jayden Danns,18.0,ENG,MF
 42,Kévin Danois,20.0,FRA,MF
-18,Kevin Danso,25.0,AUT,DF
 45,Kevin Danso,25.0,AUT,DF
 52,Dante,40.0,BRA,DF
 57,Pape Daouda Diongue,,SEN,MF
@@ -712,14 +664,12 @@ team_id,name,age,nationality,position
 54,Oumar Diakité,20.0,CIV,FW
 14,Amad Diallo,22.0,CIV,MF
 80,Assane Diao,18.0,SEN,FW
-25,Assane Diao,18.0,SEN,FW
 57,Habib Diarra,20.0,SEN,MF
 21,Moussa Diarra,23.0,MLI,DF
 13,Rúben Dias,27.0,POR,DF
 49,Krépin Diatta,25.0,SEN,DF
 44,Kandet Diawara,24.0,GUI,FW
 44,Mahamadou Diawara,19.0,FRA,MF
-47,Mahamadou Diawara,19.0,FRA,MF
 34,Brahim Díaz,24.0,MAR,FW
 36,Daniel Díaz,18.0,ESP,MF
 12,Luis Díaz,27.0,COL,FW
@@ -745,7 +695,6 @@ team_id,name,age,nationality,position
 54,Yehvann Diouf,24.0,SEN,GK
 42,Assane Dioussé,26.0,SEN,MF
 2,Axel Disasi,26.0,FRA,DF
-6,Axel Disasi,26.0,FRA,DF
 8,Roman Dixon,19.0,ENG,DF
 22,Álvaro djaló,24.0,ESP,FW
 28,Djené,32.0,TOG,DF
@@ -765,10 +714,8 @@ team_id,name,age,nationality,position
 16,Nicolás Domínguez,26.0,ARG,MF
 24,Sergi Dominguez,19.0,ESP,DF
 53,Gianluigi Donnarumma,25.0,ITA,GK
-14,Patrick Dorgu,19.0,DEN,DF
 87,Patrick Dorgu,19.0,DEN,DF
 18,Alfie Dorrington,19.0,ENG,DF
-59,Niklas Dorsch,26.0,GER,MF
 65,Niklas Dorsch,26.0,GER,MF
 80,Alberto Dossena,25.0,ITA,DF
 8,Abdoulaye Doucouré,31.0,MLI,MF
@@ -781,7 +728,6 @@ team_id,name,age,nationality,position
 95,Issa Doumbia,20.0,ITA,MF
 43,Kamory Doumbia,21.0,MLI,MF
 52,Amidou Doumbouya,16.0,FRA,DF
-80,Anastasios Douvikas,24.0,GRE,FW
 26,Anastasios Douvikas,24.0,GRE,FW
 92,Artem Dovbyk,27.0,UKR,FW
 17,Flynn Downes,25.0,ENG,MF
@@ -814,7 +760,6 @@ team_id,name,age,nationality,position
 58,Noah Edjouma,18.0,FRA,MF
 10,George Edmundson,26.0,ENG,DF
 7,Odsonne Édouard,26.0,FRA,MF
-11,Odsonne Édouard,26.0,FRA,FW
 17,Samuel Edozie,21.0,ENG,DF
 17,Ronnie Edwards,21.0,ENG,DF
 72,Johannes Eggestein,26.0,GER,FW
@@ -833,7 +778,6 @@ team_id,name,age,nationality,position
 95,Mikael Ellertsson,22.0,ISL,DF
 12,Harvey Elliott,21.0,ENG,MF
 93,Elif Elmas,24.0,MKD,FW
-71,Elif Elmas,24.0,MKD,MF
 36,Aritz Elustondo,30.0,ESP,DF
 69,Nico Elvedi,27.0,SUI,DF
 39,Adri Embarba,32.0,ESP,FW
@@ -842,7 +786,6 @@ team_id,name,age,nationality,position
 88,Emerson,25.0,BRA,DF
 4,Yunus Emre Konak,18.0,TUR,FW
 10,Julio Enciso,20.0,PAR,MF
-5,Julio Enciso,20.0,PAR,MF
 12,Wataru Endo,31.0,JPN,MF
 34,Endrick,18.0,BRA,FW
 80,Yannik Engelhardt,23.0,GER,MF
@@ -871,7 +814,6 @@ team_id,name,age,nationality,position
 80,Alieu Fadera,22.0,GAM,FW
 11,Wout Faes,26.0,BEL,DF
 82,Nicolò Fagioli,23.0,ITA,MF
-85,Nicolò Fagioli,23.0,ITA,MF
 43,Romain Faivre,26.0,FRA,MF
 87,Wladimiro Falcone,29.0,ITA,GK
 96,Davide Faraoni,32.0,ITA,DF
@@ -882,11 +824,9 @@ team_id,name,age,nationality,position
 25,Nabil Fekir,31.0,FRA,MF
 79,Mattia Felici,23.0,ITA,MF
 48,Luiz Felipe,27.0,ITA,DF
-6,João Félix,24.0,POR,FW
 88,João Félix,24.0,POR,MF
 65,Frank Feller,20.0,GER,GK
 40,Kiko Femenía,33.0,ESP,DF
-19,Evan Ferguson,19.0,IRL,FW
 5,Evan Ferguson,19.0,IRL,FW
 78,Lewis Ferguson,24.0,SCO,MF
 41,Zinedine Ferhat,31.0,ALG,FW
@@ -917,7 +857,6 @@ team_id,name,age,nationality,position
 88,Youssouf Fofana,25.0,FRA,MF
 65,Jonas Föhrenbach,28.0,GER,DF
 82,Michael Folorunsho,26.0,ITA,FW
-90,Michael Folorunsho,26.0,ITA,FW
 56,Lamine Fomba,26.0,FRA,MF
 20,Carlos Forbs,20.0,POR,MF
 25,Pablo Fornals,28.0,ESP,MF
@@ -989,7 +928,6 @@ team_id,name,age,nationality,position
 71,Viggo Gebel,16.0,GER,MF
 71,Lutsharel Geertruida,24.0,NED,DF
 66,Dennis Geiger,26.0,GER,MF
-87,Valentin Gendrey,24.0,FRA,DF
 66,Valentin Gendrey,24.0,FRA,DF
 58,Denis Genreau,25.0,AUS,MF
 6,Tyrique George,18.0,ENG,FW
@@ -1003,7 +941,6 @@ team_id,name,age,nationality,position
 67,Armin Gigovic,22.0,BIH,MF
 29,Bryan Gil,23.0,ESP,FW
 86,Mario Gila,23.0,ESP,DF
-5,Billy Gilmour,23.0,SCO,MF
 90,Billy Gilmour,23.0,SCO,MF
 65,Benedikt Gimber,27.0,GER,DF
 88,Santiago Giménez,23.0,MEX,FW
@@ -1012,7 +949,6 @@ team_id,name,age,nationality,position
 62,Jamie Gittens,19.0,ENG,FW
 60,Serge Gnabry,29.0,GER,FW
 10,Ben Godfrey,26.0,ENG,DF
-77,Ben Godfrey,26.0,ENG,DF
 9,Martial Godo,21.0,ENG,FW
 81,Saba Goglichidze,20.0,GEO,DF
 80,Edoardo Goldaniga,30.0,ITA,DF
@@ -1038,16 +974,13 @@ team_id,name,age,nationality,position
 85,Nicolás González,26.0,ARG,FW
 28,Peter González,22.0,DOM,MF
 27,Urko González,23.0,ESP,MF
-36,Urko González,23.0,ESP,MF
 15,Anthony Gordon,23.0,ENG,FW
 60,Leon Goretzka,29.0,GER,MF
 44,Mathieu Gorgelin,33.0,FRA,GK
 22,Andoni Gorosabel,27.0,ESP,DF
 82,Robin Gosens,30.0,GER,DF
-74,Robin Gosens,30.0,GER,DF
 63,Mario Götze,32.0,GER,MF
 48,Amine Gouiri,24.0,ALG,FW
-55,Amine Gouiri,24.0,ALG,MF
 92,Lucas Gourna-Douath,20.0,FRA,MF
 59,Jeffrey Gouweleeuw,33.0,NED,DF
 76,Kamil Grabara,25.0,POL,GK
@@ -1065,12 +998,10 @@ team_id,name,age,nationality,position
 23,Antoine Griezmann,33.0,FRA,FW
 64,Vincenzo Grifo,31.0,ITA,FW
 38,Florian Grillitsch,28.0,AUT,MF
-66,Florian Grillitsch,28.0,AUT,MF
 68,Álex Grimaldo,28.0,ESP,DF
 62,Pascal Groß,33.0,GER,MF
 5,Brajan Gruda,20.0,GER,MF
 75,Marco Grüll,26.0,AUT,FW
-17,Albert Grønbaek,23.0,DEN,FW
 55,Albert Grønbaek,23.0,DEN,MF
 26,Vicente Guaita,37.0,ESP,GK
 39,Sergi Guardiola,33.0,ESP,FW
@@ -1146,7 +1077,6 @@ team_id,name,age,nationality,position
 48,Luis Henrique,22.0,BRA,DF
 4,Rico Henry,27.0,ENG,DF
 11,Mads Hermansen,24.0,DEN,GK
-92,Mario Hermoso,29.0,ESP,DF
 68,Mario Hermoso,29.0,ESP,DF
 31,Javi Hernández,26.0,ESP,DF
 39,Aridane Hernández,35.0,ESP,DF
@@ -1199,7 +1129,6 @@ team_id,name,age,nationality,position
 33,Pablo Ibáñez,25.0,ESP,MF
 54,Hafiz Ibrahim,18.0,NGA,FW
 86,Arijon Ibrahimović,18.0,GER,MF
-60,Arijon Ibrahimović,18.0,GER,FW
 35,Stanis Idumbo,19.0,BEL,FW
 95,Jay Idzes,24.0,IDN,DF
 28,Iglesias,26.0,ESP,DF
@@ -1207,7 +1136,6 @@ team_id,name,age,nationality,position
 5,Igor,26.0,BRA,DF
 35,Kelechi Iheanacho,27.0,NGA,FW
 80,Jonathan Ikone,26.0,FRA,FW
-82,Jonathan Ikone,26.0,FRA,FW
 49,George Ilenikhena,17.0,NGA,FW
 74,Andrej Ilic,24.0,SRB,FW
 93,Ivan Ilić,23.0,SRB,MF
@@ -1261,7 +1189,6 @@ team_id,name,age,nationality,position
 9,Raúl Jiménez,33.0,MEX,FW
 4,Kim Jisoo,19.0,KOR,DF
 5,João Pedro,22.0,BRA,FW
-28,John Joe,20.0,IRL,MF
 54,John Joe,20.0,IRL,MF
 15,Joelinton,27.0,BRA,MF
 27,Jofre,23.0,ESP,MF
@@ -1282,7 +1209,6 @@ team_id,name,age,nationality,position
 44,Antoine Joujou,21.0,FRA,MF
 88,Luka Jović,26.0,SRB,FW
 28,Juanmi,31.0,ESP,FW
-25,Juanmi,31.0,ESP,FW
 29,Juanpe,33.0,ESP,DF
 42,Jubal,30.0,BRA,DF
 75,Anthony Jung,32.0,GER,DF
@@ -1320,7 +1246,6 @@ team_id,name,age,nationality,position
 53,Lee Kang-in,23.0,KOR,FW
 93,Yann Karamoh,26.0,FRA,MF
 73,Atakan Karazor,27.0,,MF
-78,Jesper Karlsson,26.0,SWE,FW
 87,Jesper Karlsson,26.0,SWE,FW
 94,Jesper Karlström,29.0,SWE,MF
 83,Lior Kasa,18.0,ISR,MF
@@ -1328,7 +1253,6 @@ team_id,name,age,nationality,position
 65,Mikkel Kaufmann,23.0,DEN,FW
 17,Joachim Kayi Sanda,17.0,FRA,DF
 4,Michael Kayode,20.0,ITA,DF
-82,Michael Kayode,20.0,ITA,DF
 82,Moise Kean,24.0,ITA,FW
 8,Michael Keane,31.0,ENG,DF
 44,Yassine Kechta,22.0,MAR,MF
@@ -1339,7 +1263,6 @@ team_id,name,age,nationality,position
 67,Andu Kelati,21.0,GER,MF
 12,Caoimhín Kelleher,25.0,IRL,GK
 65,Thomas Keller,24.0,GER,DF
-15,Lloyd Kelly,25.0,ENG,DF
 85,Lloyd Kelly,25.0,ENG,DF
 74,Aljoscha Kemlein,19.0,GER,MF
 80,Marc-Oliver Kempf,29.0,GER,DF
@@ -1350,7 +1273,6 @@ team_id,name,age,nationality,position
 11,Bilal El Khannouss,20.0,MAR,MF
 50,Wahbi Khazri,33.0,TUN,FW
 74,Rani Khedira,30.0,GER,MF
-13,Abdukodir Khusanov,20.0,UZB,DF
 45,Abdukodir Khusanov,20.0,UZB,DF
 87,Kialonda,26.0,ANG,DF
 21,Kiké,34.0,ESP,FW
@@ -1379,7 +1301,6 @@ team_id,name,age,nationality,position
 23,Koke,32.0,ESP,MF
 77,Sead Kolašinac,31.0,BIH,DF
 85,Randal Kolo Muani,25.0,FRA,FW
-53,Randal Kolo Muani,25.0,FRA,FW
 67,Marco Komenda,27.0,CRO,DF
 59,Mert Kömür,19.0,GER,MF
 12,Ibrahima Konaté,25.0,FRA,DF
@@ -1387,7 +1308,6 @@ team_id,name,age,nationality,position
 48,Geoffrey Kondogbia,31.0,CTA,DF
 54,Abdoul Koné,19.0,FRA,DF
 54,Amadou Koné,19.0,MLI,MF
-48,Ismaël Koné,22.0,CAN,MF
 55,Ismaël Koné,22.0,CAN,MF
 92,Manu Koné,23.0,FRA,MF
 2,Ezri Konsa,26.0,ENG,DF
@@ -1395,7 +1315,6 @@ team_id,name,age,nationality,position
 61,Kacper Koscierski,17.0,GER,DF
 77,Odilon Kossounou,23.0,CIV,DF
 82,Christian Kouamé,26.0,CIV,FW
-81,Christian Kouamé,26.0,CIV,FW
 59,Henri Koudossou,24.0,GER,DF
 76,Konstantinos Koulierakis,20.0,GRE,DF
 48,Emmanuel Koum Mbondo,18.0,FRA,DF
@@ -1411,7 +1330,6 @@ team_id,name,age,nationality,position
 27,Alex Král,26.0,CZE,MF
 66,Andrej Kramarić,33.0,CRO,MF
 65,Frans Krätzig,21.0,GER,DF
-73,Frans Krätzig,21.0,GER,DF
 61,Tom Krauß,23.0,GER,MF
 29,Ladislav Krejčí,25.0,CZE,DF
 63,Rasmus Kristensen,27.0,DEN,DF
@@ -1426,7 +1344,6 @@ team_id,name,age,nationality,position
 60,Jonah Kusi-Asare,17.0,SWE,FW
 44,Daler Kuzyaev,31.0,RUS,MF
 90,Khvicha Kvaratskhelia,23.0,GEO,FW
-53,Khvicha Kvaratskhelia,23.0,GEO,FW
 61,Moritz-Broni Kwarteng,26.0,GHA,MF
 89,Giorgos Kyriakopoulos,28.0,GRE,DF
 26,Luca de la Torre,26.0,USA,MF
@@ -1524,7 +1441,6 @@ team_id,name,age,nationality,position
 31,Roberto López,24.0,ESP,MF
 39,Unai López,28.0,ESP,MF
 26,Iker Losada,22.0,ESP,FW
-25,Iker Losada,22.0,ESP,MF
 61,Anthony Losilla,38.0,FRA,MF
 52,Jordan Lotomba,25.0,SUI,MF
 52,Tom Louchet,21.0,FRA,DF
@@ -1585,13 +1501,10 @@ team_id,name,age,nationality,position
 73,Jarzinho Malanga,18.0,GER,DF
 75,Julián Malatini,23.0,ARG,DF
 89,Daniel Maldini,22.0,ITA,MF
-77,Daniel Maldini,22.0,ITA,FW
 81,Youssef Maleh,25.0,MAR,MF
-2,Donyell Malen,25.0,NED,FW
 62,Donyell Malen,25.0,NED,FW
 83,Ruslan Malinovskyi,31.0,UKR,MF
 65,Lennard Maloney,24.0,USA,MF
-70,Lennard Maloney,24.0,USA,MF
 46,Aaron Malouda,18.0,FRA,FW
 37,Giorgi Mamardashvili,23.0,GEO,GK
 91,Dennis Man,25.0,ROU,FW
@@ -1604,13 +1517,11 @@ team_id,name,age,nationality,position
 82,Rolando Mandragora,27.0,ITA,MF
 20,Mateus Mane,,,MF
 8,Orel Mangala,26.0,BEL,MF
-47,Orel Mangala,26.0,BEL,MF
 17,Ryan Manning,28.0,IRL,DF
 26,Javier Manquillo,30.0,ESP,DF
 64,Johan Manzambi,18.0,SUI,FW
 77,Alberto Manzoni,19.0,ITA,MF
 57,Sekou Mara,22.0,FRA,FW
-83,Alessandro Marcandalli,21.0,ITA,DF
 95,Alessandro Marcandalli,21.0,ITA,DF
 35,Marcão,28.0,BRA,DF
 5,Solly March,30.0,ENG,FW
@@ -1618,10 +1529,8 @@ team_id,name,age,nationality,position
 22,Óscar de Marcos,35.0,ESP,DF
 37,Alberto Marí,23.0,ESP,FW
 89,Pablo Marí,30.0,ESP,DF
-82,Pablo Marí,30.0,ESP,DF
 23,José María Giménez,29.0,URU,DF
 81,Luca Marianucci,20.0,ITA,DF
-89,Mirko Marić,29.0,CRO,FW
 95,Mirko Marić,29.0,CRO,FW
 36,Arkaitz Mariezkurrena,19.0,ESP,FW
 90,Rafa Marín,22.0,ESP,DF
@@ -1629,7 +1538,6 @@ team_id,name,age,nationality,position
 79,Răzvan Marin,28.0,ROU,MF
 93,Guillermo Maripán,30.0,CHI,DF
 30,Mika Mármol,23.0,ESP,DF
-13,Omar Marmoush,25.0,EGY,FW
 63,Omar Marmoush,25.0,EGY,FW
 38,Mario Maroto,20.0,ESP,MF
 53,Marquinhos,30.0,BRA,DF
@@ -1702,7 +1610,6 @@ team_id,name,age,nationality,position
 85,Weston McKennie,25.0,USA,MF
 58,Mark McKenzie,25.0,USA,DF
 8,Dwight McNeil,24.0,ENG,MF
-14,Scott McTominay,27.0,SCO,MF
 90,Scott McTominay,27.0,SCO,MF
 61,Jakov Medić,25.0,CRO,DF
 45,Facundo Medina,25.0,ARG,DF
@@ -1710,7 +1617,6 @@ team_id,name,age,nationality,position
 4,Jayden Meghoma,18.0,ENG,DF
 55,Henrik Meister,20.0,DEN,FW
 50,Bamo Meïté,22.0,CIV,DF
-48,Bamo Meïté,22.0,CIV,DF
 55,Mohamed Meité,16.0,FRA,FW
 35,Mateo Mejía,21.0,ESP,FW
 41,Farid El Melali,27.0,ALG,FW
@@ -1817,7 +1723,6 @@ team_id,name,age,nationality,position
 76,Marius Müller,31.0,GER,GK
 60,Thomas Müller,34.0,GER,MF
 39,Abdul Mumin,26.0,GHA,DF
-20,Marshall Munetsi,28.0,ZIM,MF
 54,Marshall Munetsi,28.0,ZIM,MF
 9,Rodrigo Muniz,23.0,BRA,FW
 36,Aihen Muñoz,26.0,ESP,DF
@@ -1835,11 +1740,9 @@ team_id,name,age,nationality,position
 60,Jamal Musiala,21.0,GER,MF
 64,Florent Muslija,26.0,KVX,FW
 49,Almoatasem Al Musrati,28.0,LBY,MF
-77,Juan Musso,30.0,ARG,GK
 23,Juan Musso,30.0,ARG,GK
 79,Kingstone Mutandwa,21.0,ZAM,FW
 44,Junior Mwanga,21.0,FRA,MF
-57,Junior Mwanga,21.0,FRA,MF
 70,Phillipp Mwene,30.0,AUT,DF
 8,Vitaliy Mykolenko,25.0,UKR,DF
 76,Joakim Mæhle,27.0,DEN,DF
@@ -1872,11 +1775,9 @@ team_id,name,age,nationality,position
 82,Cher Ndour,20.0,ITA,MF
 78,Dan Ndoye,23.0,SUI,FW
 70,Paul Nebel,21.0,GER,MF
-2,Kosta Nedeljković,18.0,SRB,DF
 71,Kosta Nedeljković,18.0,SRB,DF
 44,Loïc Nego,33.0,HUN,DF
 67,Ivan Nekić,23.0,CRO,DF
-1,Reiss Nelson,24.0,ENG,FW
 9,Reiss Nelson,24.0,ENG,FW
 92,Victor Nelsson,25.0,DEN,DF
 72,David Nemeth,23.0,AUT,DF
@@ -1912,7 +1813,6 @@ team_id,name,age,nationality,position
 62,Felix Nmecha,23.0,GER,MF
 76,Lukas Nmecha,25.0,GER,FW
 50,Arnaud Nordin,26.0,FRA,FW
-70,Arnaud Nordin,26.0,FRA,DF
 83,Brooke Norton-Cuffy,20.0,ENG,DF
 86,Tijjani Noslin,25.0,NED,FW
 21,Hugo Novoa,21.0,ESP,DF
@@ -1949,7 +1849,6 @@ team_id,name,age,nationality,position
 40,Thiago Ojeda,21.0,ARG,MF
 45,Hamzat Ojediran,20.0,NGA,MF
 88,Noah Okafor,24.0,SUI,FW
-90,Noah Okafor,24.0,SUI,FW
 11,Caleb Okoli,23.0,ITA,DF
 96,Yllan Okou,21.0,FRA,DF
 94,Maduka Okoye,24.0,NGA,GK
@@ -1976,14 +1875,12 @@ team_id,name,age,nationality,position
 91,Jacob Ondrejka,21.0,SWE,MF
 70,Karim Onisiwo,32.0,AUT,MF
 17,Paul Onuachu,30.0,NGA,FW
-4,Frank Onyeka,26.0,NGA,MF
 59,Frank Onyeka,26.0,NGA,MF
 71,Loïs Openda,24.0,BEL,FW
 44,Christopher Operi,27.0,CIV,DF
 42,Fredrik Oppegard,21.0,NOR,DF
 52,Victor Orakpo,18.0,NGA,FW
 54,Ike Orazi,17.0,IRL,MF
-47,Gift Orban,22.0,NGA,FW
 66,Gift Orban,22.0,NGA,FW
 71,Willi Orban,31.0,HUN,DF
 61,Ivan Ordets,32.0,UKR,DF
@@ -2013,7 +1910,6 @@ team_id,name,age,nationality,position
 42,Elisha Owusu,26.0,GHA,MF
 36,Mikel Oyarzabal,27.0,ESP,FW
 96,Daniel Oyegoke,21.0,ENG,DF
-76,Salih Özcan,26.0,TUR,MF
 62,Salih Özcan,26.0,TUR,MF
 38,Cenk Özkacar,23.0,TUR,DF
 13,Nico O’Reilly,19.0,ENG,DF
@@ -2024,7 +1920,6 @@ team_id,name,age,nationality,position
 94,Simone Pafundi,18.0,ITA,MF
 68,Exequiel Palacios,25.0,ARG,MF
 89,Tomás Palacios,21.0,ARG,DF
-84,Tomás Palacios,21.0,ARG,DF
 39,Isaac Palazón Camacho,29.0,ESP,MF
 93,Alberto Paleari,31.0,ITA,GK
 77,Marco Palestra,19.0,ITA,DF
@@ -2063,7 +1958,6 @@ team_id,name,age,nationality,position
 86,Pedro,37.0,ESP,FW
 56,Kévin Pedro,18.0,FRA,DF
 35,Adrià Pedrosa,26.0,ESP,DF
-54,Jordan Pefok,28.0,USA,FW
 74,Jordan Pefok,28.0,USA,FW
 30,Pejiño,28.0,ESP,FW
 81,Pietro Pellegri,23.0,ITA,FW
@@ -2071,7 +1965,6 @@ team_id,name,age,nationality,position
 86,Luca Pellegrini,25.0,ITA,DF
 91,Mateo Pellegrino,23.0,ARG,FW
 42,Théo Pellenard,30.0,FRA,DF
-87,Andy Pelmard,24.0,FRA,DF
 30,Andy Pelmard,24.0,FRA,DF
 44,Timothee Pembele,21.0,FRA,DF
 48,Faris Pemi Moumbagna,24.0,CMR,FW
@@ -2090,7 +1983,6 @@ team_id,name,age,nationality,position
 40,Ayoze Pérez,31.0,ESP,FW
 28,Carles Pérez,26.0,ESP,MF
 37,Francisco Perez,21.0,ESP,FW
-95,Kike Pérez,27.0,ESP,MF
 38,Kike Pérez,27.0,ESP,MF
 38,Luis Pérez,29.0,ESP,DF
 94,Nehuén Pérez,24.0,ARG,DF
@@ -2111,7 +2003,6 @@ team_id,name,age,nationality,position
 66,Luca Philipp,23.0,GER,GK
 64,Maximilian Philipp,30.0,GER,MF
 10,Kalvin Phillips,28.0,ENG,MF
-2,Jaden Philogene Bidace,22.0,ENG,FW
 10,Jaden Philogene Bidace,22.0,ENG,FW
 21,Pica,22.0,ESP,DF
 79,Roberto Piccoli,23.0,ITA,FW
@@ -2141,7 +2032,6 @@ team_id,name,age,nationality,position
 18,Pedro Porro,24.0,ESP,DF
 29,Portu,32.0,ESP,FW
 78,Stefan Posch,27.0,AUT,DF
-77,Stefan Posch,27.0,AUT,DF
 45,Tom Pouilly,21.0,FRA,DF
 71,Yussuf Poulsen,30.0,DEN,FW
 22,Beñat Prados,23.0,ESP,MF
@@ -2178,7 +2068,6 @@ team_id,name,age,nationality,position
 41,Lilian Raolisoa,24.0,FRA,DF
 24,Raphinha,27.0,BRA,FW
 14,Marcus Rashford,26.0,ENG,FW
-2,Marcus Rashford,26.0,ENG,FW
 90,Giacomo Raspadori,24.0,ITA,FW
 39,Andrei Ratiu,26.0,ROU,DF
 33,Raúl,23.0,ESP,FW
@@ -2213,7 +2102,6 @@ team_id,name,age,nationality,position
 28,Diego Rico,31.0,ESP,DF
 73,Fabian Rieder,22.0,SUI,MF
 70,Lasse Rieß,23.0,GER,GK
-21,Luis Rioja,30.0,ESP,FW
 37,Luis Rioja,30.0,ESP,MF
 23,Rodrigo Riquelme,24.0,ESP,MF
 28,Alberto Risco,18.0,ESP,MF
@@ -2243,7 +2131,6 @@ team_id,name,age,nationality,position
 25,Ricardo Rodríguez,31.0,SUI,DF
 34,Rodrygo,23.0,BRA,FW
 4,Mads Roerslev,25.0,DEN,DF
-76,Mads Roerslev,25.0,DEN,DF
 2,Morgan Rogers,22.0,ENG,FW
 64,Merlin Röhl,22.0,GER,MF
 86,Alessio Romagnoli,29.0,ITA,DF
@@ -2261,7 +2148,6 @@ team_id,name,age,nationality,position
 64,Max Rosenfelder,21.0,GER,DF
 31,Valentin Rosier,27.0,FRA,DF
 74,Tom Rothe,19.0,GER,DF
-55,Anthony Rouault,23.0,FRA,DF
 73,Anthony Rouault,23.0,FRA,DF
 85,Jonas Rouhi,20.0,SWE,DF
 74,Jérôme Roussillon,31.0,FRA,DF
@@ -2288,9 +2174,7 @@ team_id,name,age,nationality,position
 62,Marcel Sabitzer,30.0,AUT,MF
 50,Falaye Sacko,29.0,MLI,DF
 37,Umar Sadiq,27.0,NGA,FW
-36,Umar Sadiq,27.0,NGA,FW
 92,Alexis Saelemaekers,25.0,BEL,DF
-88,Alexis Saelemaekers,25.0,BEL,DF
 31,Jorge Sáenz,27.0,ESP,DF
 53,Matvei Safonov,25.0,RUS,GK
 50,Modibo Sagnan,25.0,MLI,DF
@@ -2301,7 +2185,6 @@ team_id,name,age,nationality,position
 1,Bukayo Saka,22.0,ENG,FW
 71,Faik Sakar,16.0,GER,MF
 80,Marco Sala,25.0,ITA,DF
-87,Marco Sala,25.0,ITA,DF
 43,Ibrahim Salah,22.0,MAR,FW
 12,Mohamed Salah,32.0,EGY,FW
 92,Anass Salah-Eddine,22.0,NED,DF
@@ -2315,10 +2198,8 @@ team_id,name,age,nationality,position
 44,Yoann Salmier,31.0,GUF,DF
 77,Lazar Samardzic,22.0,SRB,MF
 66,Diadie Samassékou,28.0,MLI,MF
-47,Mama Samba Baldé,28.0,GNB,FW
 43,Mama Samba Baldé,28.0,GNB,FW
 55,Brice Samba,30.0,FRA,GK
-45,Brice Samba,30.0,FRA,GK
 35,Albert Sambi Lokonga,24.0,BEL,MF
 81,Junior Sambia,27.0,FRA,DF
 38,Chuky san jose,20.0,ESP,MF
@@ -2343,7 +2224,6 @@ team_id,name,age,nationality,position
 52,Morgan Sanson,29.0,FRA,MF
 87,Nicola Sansone,32.0,ITA,MF
 52,Baptiste Santamaria,29.0,FRA,MF
-55,Baptiste Santamaria,29.0,FRA,MF
 28,Jesús Santiago,20.0,ESP,MF
 57,Andrey Santos,20.0,BRA,MF
 63,Kauã Santos,21.0,BRA,GK
@@ -2383,7 +2263,6 @@ team_id,name,age,nationality,position
 65,Léo Scienza,25.0,BRA,FW
 3,Alex Scott,20.0,ENG,MF
 79,Simone Scuffet,28.0,ITA,GK
-90,Simone Scuffet,28.0,ITA,GK
 57,Jérémy Sebas,21.0,MTQ,FW
 21,Aleksandar Sedlar,32.0,SRB,DF
 81,Jacopo Seghetti,19.0,ITA,GK
@@ -2413,7 +2292,6 @@ team_id,name,age,nationality,position
 3,Zain Silcott-Duberry,19.0,MSR,FW
 64,Kiliann Sildillia,22.0,FRA,DF
 75,André Silva,28.0,POR,FW
-71,André Silva,28.0,POR,FW
 13,Bernardo Silva,29.0,POR,MF
 49,Caio Henrique Oliveira Silva,27.0,BRA,DF
 30,Fábio Silva,22.0,POR,FW
@@ -2445,7 +2323,6 @@ team_id,name,age,nationality,position
 63,Ellyes Skhiri,29.0,TUN,MF
 11,Oliver Skipp,23.0,ENG,MF
 55,Leo Skiri Østigård,24.0,NOR,DF
-66,Leo Skiri Østigård,24.0,NOR,DF
 78,Łukasz Skorupski,33.0,POL,GK
 76,Andreas Skov Olsen,24.0,DEN,FW
 74,Robert Skov,28.0,DEN,DF
@@ -2477,14 +2354,12 @@ team_id,name,age,nationality,position
 26,Hugo Sotelo,20.0,ESP,MF
 45,Florian Sotoca,33.0,FRA,FW
 82,Riccardo Sottil,25.0,ITA,FW
-88,Riccardo Sottil,25.0,ITA,FW
 19,Tomáš Souček,29.0,CZE,MF
 92,Matìas Soulé,21.0,ARG,MF
 11,Boubakary Soumaré,25.0,FRA,MF
 44,Issa Soumaré,23.0,SEN,FW
 35,Djibril Sow,27.0,SUI,MF
 57,Saidou Sow,22.0,GUI,DF
-51,Saidou Sow,22.0,GUI,DF
 18,Djed Spence,23.0,ENG,DF
 90,Leonardo Spinazzola,31.0,ITA,DF
 88,Marco Sportiello,32.0,ITA,GK
@@ -2540,7 +2415,6 @@ team_id,name,age,nationality,position
 12,Dominik Szoboszlai,23.0,HUN,MF
 23,Alexander Sørloth,28.0,NOR,FW
 50,Musa Al-Taamari,27.0,JOR,FW
-55,Musa Al-Taamari,27.0,JOR,FW
 66,Haris Tabakovic,30.0,BIH,FW
 47,Nicolás Tagliafico,31.0,ARG,DF
 68,Jonathan Tah,28.0,GER,DF
@@ -2565,7 +2439,6 @@ team_id,name,age,nationality,position
 27,Álvaro Tejero,28.0,ESP,MF
 37,Martín Tejón,20.0,ESP,MF
 18,Mathys Tel,19.0,FRA,FW
-60,Mathys Tel,19.0,FRA,FW
 68,Nathan Tella,25.0,NGA,MF
 21,Nahuel Tenaglia,28.0,ARG,DF
 53,Arnau Tenas,23.0,ESP,GK
@@ -2573,7 +2446,6 @@ team_id,name,age,nationality,position
 24,Marc-André ter Stegen,32.0,GER,GK
 88,Filippo Terracciano,21.0,ITA,DF
 82,Pietro Terracciano,34.0,ITA,GK
-40,Ramón Terrats,23.0,ESP,MF
 28,Ramón Terrats,23.0,ESP,MF
 68,Martin Terrier,27.0,FRA,MF
 47,Tanner Tessmann,22.0,USA,MF
@@ -2651,7 +2523,6 @@ team_id,name,age,nationality,position
 73,Deniz Undav,28.0,GER,FW
 27,Naci Ünüvar,21.0,NED,MF
 60,Dayot Upamecano,25.0,FRA,DF
-78,Kacper Urbanski,19.0,POL,MF
 89,Kacper Urbanski,19.0,POL,MF
 60,Jonas Urbig,20.0,GER,GK
 63,Can Uzun,18.0,TUR,MF
@@ -2667,14 +2538,12 @@ team_id,name,age,nationality,position
 89,Mattia Valoti,30.0,ITA,MF
 34,Federico Valverde,26.0,URU,MF
 80,Ignace Van Der Brempt,22.0,BEL,DF
-32,Siebe Van Der Heyden,26.0,BEL,DF
 72,Siebe Van Der Heyden,26.0,BEL,DF
 12,Virgil van Dijk,33.0,NED,DF
 49,Vanderson,23.0,BRA,DF
 71,Maarten Vandevoordt,22.0,BEL,GK
 11,Jamie Vardy,37.0,ENG,FW
 35,Ruben Vargas,25.0,SUI,FW
-59,Ruben Vargas,25.0,SUI,MF
 72,Nikola Vasilj,28.0,BIH,GK
 81,Devis Vásquez,26.0,COL,GK
 83,Johan Vásquez,25.0,MEX,DF
@@ -2685,7 +2554,6 @@ team_id,name,age,nationality,position
 34,Lucas Vázquez,33.0,ESP,DF
 86,Matías Vecino,32.0,URU,MF
 87,Danilo Veiga,21.0,POR,DF
-6,Renato Veiga,21.0,POR,DF
 85,Renato Veiga,21.0,POR,DF
 27,Alejo Véliz,20.0,ARG,FW
 75,Miloš Veljković,28.0,SRB,DF
@@ -2705,7 +2573,6 @@ team_id,name,age,nationality,position
 21,Carlos Vicente,25.0,ESP,FW
 24,Pau Victor,22.0,ESP,FW
 33,Nacho Vidal,29.0,ESP,DF
-70,Gabriel Vidovic,20.0,CRO,MF
 60,Gabriel Vidovic,20.0,CRO,MF
 25,Fran Vieites,25.0,ESP,GK
 30,Sergio Viera,19.0,ESP,MF
@@ -2716,38 +2583,31 @@ team_id,name,age,nationality,position
 79,Nicolas Viola,34.0,ITA,FW
 30,Viti,26.0,ESP,DF
 81,Mattia Viti,22.0,ITA,DF
-83,Vitinha,24.0,POR,FW
 53,Vitinha,24.0,POR,MF
 22,Daniel Vivian,25.0,ESP,DF
 29,Krapyvtsov Vladyslav,19.0,UKR,GK
 85,Dušan Vlahović,24.0,SRB,FW
 77,Vanja Vlahović,20.0,SRB,FW
 93,Nikola Vlašić,26.0,CRO,MF
-83,Alessandro Vogliacco,25.0,ITA,DF
 91,Alessandro Vogliacco,25.0,ITA,DF
 74,Kevin Vogt,32.0,GER,DF
 93,Mërgim Vojvoda,29.0,KVX,DF
-80,Mërgim Vojvoda,29.0,KVX,DF
 74,Kevin Volland,32.0,GER,FW
 76,Aster Vranckx,21.0,BEL,MF
 84,Stefan de Vrij,32.0,NED,DF
 56,Ibrahima Wadji,29.0,SEN,FW
 72,Robert Wagner,21.0,GER,MF
 48,Elye Wahi,21.0,FRA,FW
-63,Elye Wahi,21.0,FRA,FW
 72,Hauke Wahl,30.0,GER,DF
 13,Kyle Walker,34.0,ENG,DF
-88,Kyle Walker,34.0,ENG,DF
 17,Kyle Walker-Peters,27.0,ENG,DF
 10,Christian Walton,28.0,ENG,GK
 93,Sebastian Walukiewicz,24.0,POL,DF
-81,Sebastian Walukiewicz,24.0,POL,DF
 19,Aaron Wan-Bissaka,26.0,ENG,DF
 65,Paul Wanner,18.0,GER,MF
 11,Danny Ward,31.0,WAL,GK
 7,Joel Ward,34.0,ENG,DF
 19,James Ward-Prowse,29.0,ENG,MF
-16,James Ward-Prowse,29.0,ENG,MF
 62,Kjell-Arik Wätjen,18.0,GER,MF
 2,Ollie Watkins,28.0,ENG,FW
 85,Timothy Weah,24.0,USA,DF
@@ -2757,7 +2617,6 @@ team_id,name,age,nationality,position
 70,Nelson Weiper,19.0,GER,FW
 75,Mitchell Weiser,30.0,GER,DF
 72,Noah Weißhaupt,22.0,GER,FW
-64,Noah Weißhaupt,22.0,GER,FW
 5,Danny Welbeck,33.0,ENG,FW
 17,Welington,23.0,BRA,DF
 18,Timo Werner,28.0,GER,FW
@@ -2813,10 +2672,8 @@ team_id,name,age,nationality,position
 49,Denis Zakaria,27.0,SUI,MF
 36,Arsen Zakharyan,21.0,RUS,MF
 92,Nicola Zalewski,22.0,POL,DF
-84,Nicola Zalewski,22.0,POL,DF
 90,Andre-Frank Zambo Anguissa,28.0,CMR,MF
 95,Francesco Zampano,30.0,ITA,DF
-82,Nicolò Zaniolo,25.0,ITA,FW
 77,Nicolò Zaniolo,25.0,ITA,FW
 83,Alessandro Zanoli,23.0,ITA,FW
 93,Duván Zapata,33.0,COL,FW
@@ -2829,11 +2686,8 @@ team_id,name,age,nationality,position
 94,Jordan Zemura,24.0,ZIM,DF
 70,Robin Zentner,29.0,GER,GK
 95,Alessio Zerbin,25.0,ITA,DF
-90,Alessio Zerbin,25.0,ITA,FW
 89,Kevin Zeroli,19.0,ITA,MF
-88,Kevin Zeroli,19.0,ITA,MF
 59,Cedric Zesiger,26.0,SUI,DF
-76,Cedric Zesiger,26.0,SUI,DF
 75,Michael Zetterer,29.0,GER,GK
 51,Nathan Zeze,19.0,FRA,DF
 46,Edon Zhegrova,25.0,KVX,FW
@@ -2852,4 +2706,3 @@ team_id,name,age,nationality,position
 81,Szymon Żurkowski,26.0,POL,MF
 1,Martin Ødegaard,25.0,NOR,MF
 89,Milan Đurić,34.0,BIH,FW
-91,Milan Đurić,34.0,BIH,FW
