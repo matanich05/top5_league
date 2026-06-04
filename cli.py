@@ -1,30 +1,55 @@
 import sqlite3
-from src.baza import League, Team, Player
+
+
+def poisci_ligo(conn, league_id):
+    """Vrne ligo z izbranim ID-jem ali None, ce liga ne obstaja."""
+    return conn.execute("""
+        SELECT league_id, name, season
+        FROM league
+        WHERE league_id = ?;
+    """, (league_id,)).fetchone()
+
+
+def poisci_ekipo(conn, team_id):
+    """Vrne ekipo z izbranim ID-jem ali None, ce ekipa ne obstaja."""
+    return conn.execute("""
+        SELECT team_id, league_id, name, city, stadium, founded_year
+        FROM team
+        WHERE team_id = ?;
+    """, (team_id,)).fetchone()
 
 
 def izpisi_lige(conn):
     print("\n--- LIGE ---")
-    najdeno = False
-    for liga in League.poisci_vse(conn):
-        najdeno = True
-        print(f"{liga.league_id}: {liga.name} ({liga.season})")
-    if not najdeno:
+    rows = conn.execute("""
+        SELECT league_id, name, season
+        FROM league
+        ORDER BY league_id;
+    """).fetchall()
+    if not rows:
         print("Ni lig.")
+        return
+    for league_id, name, season in rows:
+        print(f"{league_id}: {name} ({season})")
 
 
 def izpisi_ekipe(conn):
     print("\n--- EKIPE ---")
-    najdeno = False
-    for ekipa in Team.poisci_vse(conn):
-        najdeno = True
-        print(
-            f"{ekipa.team_id}: {ekipa.name}, "
-            f"liga {ekipa.league_id}, "
-            f"mesto {ekipa.city}, "
-            f"stadion {ekipa.stadium}"
-        )
-    if not najdeno:
+    rows = conn.execute("""
+        SELECT team_id, league_id, name, city, stadium
+        FROM team
+        ORDER BY team_id;
+    """).fetchall()
+    if not rows:
         print("Ni ekip.")
+        return
+    for team_id, league_id, name, city, stadium in rows:
+        print(
+            f"{team_id}: {name}, "
+            f"liga {league_id}, "
+            f"mesto {city}, "
+            f"stadion {stadium}"
+        )
 
 
 def izpisi_ekipe_po_ligi(conn):
@@ -35,34 +60,44 @@ def izpisi_ekipe_po_ligi(conn):
         print("ID lige mora biti število.")
         return
 
-    liga = League.poisci_po_id(conn, int(league_id))
+    liga = poisci_ligo(conn, int(league_id))
     if liga is None:
         print("Liga ne obstaja.")
         return
 
-    print(f"\nEkipe v ligi {liga.name} ({liga.season}):")
-    najdeno = False
-    for ekipa in Team.poisci_po_ligi(conn, int(league_id)):
-        najdeno = True
-        print(f"{ekipa.team_id}: {ekipa.name} - {ekipa.city}")
-    if not najdeno:
+    rows = conn.execute("""
+        SELECT team_id, name, city
+        FROM team
+        WHERE league_id = ?
+        ORDER BY name;
+    """, (int(league_id),)).fetchall()
+
+    print(f"\nEkipe v ligi {liga['name']} ({liga['season']}):")
+    if not rows:
         print("Ta liga nima ekip.")
+        return
+    for team_id, name, city in rows:
+        print(f"{team_id}: {name} - {city}")
 
 
 def izpisi_igralce(conn):
     print("\n--- IGRALCI ---")
-    najdeno = False
-    for igralec in Player.poisci_vse(conn):
-        najdeno = True
-        print(
-            f"{igralec.player_id}: {igralec.name}, "
-            f"ekipa {igralec.team_id}, "
-            f"starost {igralec.age}, "
-            f"narodnost {igralec.nationality}, "
-            f"pozicija {igralec.position}"
-        )
-    if not najdeno:
+    rows = conn.execute("""
+        SELECT player_id, team_id, name, age, nationality, position
+        FROM player
+        ORDER BY player_id;
+    """).fetchall()
+    if not rows:
         print("Ni igralcev.")
+        return
+    for player_id, team_id, name, age, nationality, position in rows:
+        print(
+            f"{player_id}: {name}, "
+            f"ekipa {team_id}, "
+            f"starost {age}, "
+            f"narodnost {nationality}, "
+            f"pozicija {position}"
+        )
 
 
 def izpisi_igralce_po_ekipi(conn):
@@ -73,23 +108,29 @@ def izpisi_igralce_po_ekipi(conn):
         print("ID ekipe mora biti število.")
         return
 
-    ekipa = Team.poisci_po_id(conn, int(team_id))
+    ekipa = poisci_ekipo(conn, int(team_id))
     if ekipa is None:
         print("Ekipa ne obstaja.")
         return
 
-    print(f"\nIgralci ekipe {ekipa.name}:")
-    najdeno = False
-    for igralec in Player.poisci_po_ekipi(conn, int(team_id)):
-        najdeno = True
-        print(
-            f"{igralec.player_id}: {igralec.name}, "
-            f"{igralec.position}, "
-            f"starost {igralec.age}, "
-            f"{igralec.nationality}"
-        )
-    if not najdeno:
+    rows = conn.execute("""
+        SELECT player_id, name, position, age, nationality
+        FROM player
+        WHERE team_id = ?
+        ORDER BY name;
+    """, (int(team_id),)).fetchall()
+
+    print(f"\nIgralci ekipe {ekipa['name']}:")
+    if not rows:
         print("Ta ekipa nima igralcev.")
+        return
+    for player_id, name, position, age, nationality in rows:
+        print(
+            f"{player_id}: {name}, "
+            f"{position}, "
+            f"starost {age}, "
+            f"{nationality}"
+        )
 
 
 def izpisi_tekme(conn):
@@ -125,7 +166,7 @@ def izpisi_tekme_po_ligi(conn):
         print("ID lige mora biti število.")
         return
 
-    liga = League.poisci_po_id(conn, int(league_id))
+    liga = poisci_ligo(conn, int(league_id))
     if liga is None:
         print("Liga ne obstaja.")
         return
@@ -140,7 +181,7 @@ def izpisi_tekme_po_ligi(conn):
     """, {"league_id": int(league_id)})
     rows = cur.fetchall()
 
-    print(f"\nTekme v ligi {liga.name} ({liga.season}):")
+    print(f"\nTekme v ligi {liga['name']} ({liga['season']}):")
     if not rows:
         print("Ta liga nima tekem.")
         return
@@ -161,7 +202,7 @@ def izpisi_lestvico_lige(conn):
         print("ID lige mora biti število.")
         return
 
-    liga = League.poisci_po_id(conn, int(league_id))
+    liga = poisci_ligo(conn, int(league_id))
     if liga is None:
         print("Liga ne obstaja.")
         return
@@ -224,7 +265,7 @@ def izpisi_lestvico_lige(conn):
         ORDER BY points DESC, (goals_for - goals_against) DESC, goals_for DESC, t.name ASC;
     """, (int(league_id),)).fetchall()
 
-    print(f"\nLestvica: {liga.name} ({liga.season})")
+    print(f"\nLestvica: {liga['name']} ({liga['season']})")
     print(f"{'#':>2}  {'Ekipa':<24} {'OD':>3} {'Z':>3} {'R':>3} {'P':>3} {'Goli':>9} {'T':>3}")
     for i, row in enumerate(rows, start=1):
         name, played, wins, draws, losses, goals_for, goals_against, points = row
@@ -296,11 +337,12 @@ def dodaj_ligo(conn):
         print("Ime lige in sezona ne smeta biti prazna.")
         return
 
-    liga = League(None, name, season)
-
     try:
         with conn:
-            liga.vstavi(conn)
+            conn.execute("""
+                INSERT INTO league (name, season)
+                VALUES (?, ?);
+            """, (name, season))
         print("Liga dodana.")
     except sqlite3.IntegrityError:
         print("Ta liga za to sezono že obstaja.")
@@ -322,7 +364,7 @@ def dodaj_ekipo(conn):
         print("Ime ekipe ne sme biti prazno.")
         return
 
-    liga = League.poisci_po_id(conn, int(league_id))
+    liga = poisci_ligo(conn, int(league_id))
     if liga is None:
         print("Liga ne obstaja.")
         return
@@ -334,11 +376,12 @@ def dodaj_ekipo(conn):
             return
         leto = int(founded_year)
 
-    ekipa = Team(None, int(league_id), name, city or None, stadium or None, leto)
-
     try:
         with conn:
-            ekipa.vstavi(conn)
+            conn.execute("""
+                INSERT INTO team (league_id, name, city, stadium, founded_year)
+                VALUES (?, ?, ?, ?, ?);
+            """, (int(league_id), name, city or None, stadium or None, leto))
         print("Ekipa dodana.")
     except sqlite3.IntegrityError:
         print("Ta ekipa v tej ligi že obstaja.")
@@ -360,7 +403,7 @@ def dodaj_igralca(conn):
         print("Ime igralca ne sme biti prazno.")
         return
 
-    ekipa = Team.poisci_po_id(conn, int(team_id))
+    ekipa = poisci_ekipo(conn, int(team_id))
     if ekipa is None:
         print("Ekipa ne obstaja.")
         return
@@ -372,18 +415,12 @@ def dodaj_igralca(conn):
             return
         starost = int(age)
 
-    igralec = Player(
-        None,
-        int(team_id),
-        name,
-        starost,
-        nationality or None,
-        position or None
-    )
-
     try:
         with conn:
-            igralec.vstavi(conn)
+            conn.execute("""
+                INSERT INTO player (team_id, name, age, nationality, position)
+                VALUES (?, ?, ?, ?, ?);
+            """, (int(team_id), name, starost, nationality or None, position or None))
         print("Igralec dodan.")
     except sqlite3.IntegrityError:
         print("Ta igralec v tej ekipi že obstaja.")
