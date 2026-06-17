@@ -13,33 +13,14 @@ LEAGUE_FLAG_CLASSES = {
 }
 
 
-def ensure_player_season_stats(conn):
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS player_season_stats (
-            player_id      INTEGER PRIMARY KEY,
-            matches_played INTEGER DEFAULT 0,
-            starts         INTEGER DEFAULT 0,
-            minutes_played INTEGER DEFAULT 0,
-            goals          INTEGER DEFAULT 0,
-            assists        INTEGER DEFAULT 0,
-            yellow_cards   INTEGER DEFAULT 0,
-            red_cards      INTEGER DEFAULT 0,
-            FOREIGN KEY (player_id) REFERENCES player(player_id) ON DELETE CASCADE
-        );
-    """)
-    conn.commit()
-
-
 @app.template_global()
 def league_flag_class(league_name):
-    return LEAGUE_FLAG_CLASSES.get(league_name, "generic")
+    return LEAGUE_FLAG_CLASSES[league_name]
 
 
 def get_conn():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA foreign_keys = ON;")
-    ensure_player_season_stats(conn)
     return conn
 
 
@@ -97,12 +78,9 @@ def index():
             p.name AS player_name,
             t.team_id,
             t.name AS team_name,
-            l.league_id,
-            l.name AS league_name,
             COALESCE(pss.goals, 0) AS goals
         FROM player p
         JOIN team t ON p.team_id = t.team_id
-        JOIN league l ON t.league_id = l.league_id
         LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
         ORDER BY goals DESC, p.name ASC
         LIMIT 25;
@@ -114,12 +92,9 @@ def index():
             p.name AS player_name,
             t.team_id,
             t.name AS team_name,
-            l.league_id,
-            l.name AS league_name,
             COALESCE(pss.assists, 0) AS assists
         FROM player p
         JOIN team t ON p.team_id = t.team_id
-        JOIN league l ON t.league_id = l.league_id
         LEFT JOIN player_season_stats pss ON p.player_id = pss.player_id
         ORDER BY assists DESC, p.name ASC
         LIMIT 20;
@@ -145,7 +120,7 @@ def all_matches():
     q = request.args.get("q", "").strip()
 
     lige = conn.execute("""
-        SELECT league_id, name, season
+        SELECT league_id, name
         FROM league
         ORDER BY name;
     """).fetchall()
@@ -185,7 +160,6 @@ def all_matches():
             m.match_id,
             l.league_id,
             l.name AS league_name,
-            l.season,
             th.team_id AS home_team_id,
             th.name AS home_team,
             ta.team_id AS away_team_id,
@@ -223,7 +197,7 @@ def top_scorers():
     league_id = request.args.get("league_id", "").strip()
 
     lige = conn.execute("""
-        SELECT league_id, name, season
+        SELECT league_id, name
         FROM league
         ORDER BY name;
     """).fetchall()
@@ -285,7 +259,7 @@ def top_assists():
     league_id = request.args.get("league_id", "").strip()
 
     lige = conn.execute("""
-        SELECT league_id, name, season
+        SELECT league_id, name
         FROM league
         ORDER BY name;
     """).fetchall()
@@ -407,13 +381,6 @@ def league_detail(league_id):
     if liga is None:
         conn.close()
         abort(404)
-
-    ekipe = conn.execute("""
-        SELECT team_id, name, city, stadium, founded_year
-        FROM team
-        WHERE league_id = ?
-        ORDER BY name;
-    """, (league_id,)).fetchall()
 
     rounds = conn.execute("""
         SELECT DISTINCT round_number
@@ -551,7 +518,6 @@ def league_detail(league_id):
     return render_template(
         "league_detail.html",
         liga=liga,
-        ekipe=ekipe,
         tekme=tekme,
         lestvica=lestvica,
         rounds=rounds,

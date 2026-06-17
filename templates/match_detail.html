@@ -14,7 +14,7 @@
     <p>Datum: {{ tekma['match_date'] }}</p>
     <p>Krog: {{ tekma['round_number'] or '-' }}</p>
 
-    <p class="score">
+    <p>
         {% if tekma['home_goals'] is not none and tekma['away_goals'] is not none %}
             {{ tekma['home_goals'] }} : {{ tekma['away_goals'] }}
         {% else %}

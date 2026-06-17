@@ -10,7 +10,6 @@ class Tabela:
     """Osnovni razred za ustvarjanje tabel in uvoz podatkov iz CSV datotek."""
 
     ime = None
-    pk = None
     podatki = None
 
     def __init__(self, conn):
